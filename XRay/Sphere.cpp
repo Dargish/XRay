@@ -1,28 +1,53 @@
 #include "Sphere.h"
 
-#include <limits>
+#include <cmath>
 
 
-Sphere::Sphere(Vector3 centre_, float radius_) :
-	centre(centre_), radius(radius_)
+Sphere::Sphere(
+	Vector3 center_ /*= Vector3(0.0f, 0.0f, 0.0f)*/,
+	float radius_ /*= 1.0f*/
+) :
+	center(center_), radius(radius_)
 {
 
 }
 
-float Sphere::intersect(const Ray& ray) const
+bool Sphere::intersect(const Ray& ray, float& t) const
 {
-	Vector3 v = centre - ray.origin;
-	if (v.length() < radius)
+	Vector3 offset = ray.origin - center;
+
+	float radiusSquared = radius * radius;
+
+	float squaredDistance = offset.lengthSquared();
+
+	if (squaredDistance < radiusSquared)
 	{
-		// Ray origin is inside the sphere
-		return std::numeric_limits<float>::max();
-	}
-	float DoV = ray.direction.dot(v);
-	if (DoV < 0.0f)
-	{
-		// Sphere is behind the ray
-		return std::numeric_limits<float>::max();
+		return false;
 	}
 
-	Vector3 closestPoint = ray.origin - ray.direction * DoV;
+	float a = 1.0f; //ray.direction.lengthSquared(); // Assume ray direction is normalised
+	float b = 2.0f * ray.direction.dot(offset);
+	float c = offset.lengthSquared() - radiusSquared;
+		
+	float d = (b*b) - (4.0f*a*c);
+	
+	if (d < 0.0f)
+	{
+		return false;
+	}
+	else
+	{
+		float sqrt_d = sqrt(d);
+		float t0 = (-b - sqrt_d) / (2.0f * a);
+		float t1 = (-b + sqrt_d) / (2.0f * a);
+
+		if (t1 < 0.0f)
+		{
+			return false;
+		}
+
+		t = t0;
+
+		return true;
+	}
 }

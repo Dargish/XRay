@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 
 class Vector3
 {
@@ -19,9 +21,17 @@ public:
 
 	float length() const;
 
+	float lengthSquared() const;
+
+	float distance(const Vector3& other) const;
+
 	float dot(const Vector3& other) const;
 
+	Vector3 cross(const Vector3& other) const;
+
 	Vector3& normalize();
-	Vector3 normalize() const;
+	Vector3 normalized() const;
+
+	friend std::ostream& operator<<(std::ostream& os, const Vector3& vec);
 };
 

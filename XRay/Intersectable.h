@@ -9,6 +9,6 @@ public:
 	Intersectable();
 	virtual ~Intersectable();
 
-	virtual float intersect(const Ray& ray) const = 0;
+	virtual bool intersect(const Ray& ray, float& t) const = 0;
 };
 
