@@ -16,7 +16,7 @@ Camera::Camera(
 {
 	m_direction.normalize();
 	m_up.normalize();
-	m_right = m_direction.cross(m_up);
+	m_right = -m_direction.cross(m_up);
 	m_right.normalize();
 	m_aperture = m_focalLength / m_fStop;
 }
@@ -55,7 +55,7 @@ void Camera::setDirection(const Vector3& direction_)
 {
 	m_direction = direction_;
 	m_direction.normalize();
-	m_right = m_direction.cross(m_up);
+	m_right = -m_direction.cross(m_up);
 	m_right.normalize();
 }
 
@@ -63,7 +63,7 @@ void Camera::setUp(const Vector3& up_)
 {
 	m_up = up_;
 	m_up.normalize();
-	m_right = m_direction.cross(m_up);
+	m_right = -m_direction.cross(m_up);
 	m_right.normalize();
 }
 
@@ -83,6 +83,6 @@ Ray Camera::ray(float x, float y)
 {
 	Vector3 screenPoint = m_position + m_direction * m_focalLength;
 	screenPoint += m_right * m_aperture * x;
-	screenPoint += m_up * m_aperture * y;
+	screenPoint -= m_up * m_aperture * y; // Negate Screen Y
 	return Ray(m_position, (screenPoint - m_position).normalize());
 }

@@ -1,8 +1,11 @@
+#define NOMINMAX
+
 #include <tbb/tbb.h>
 #include <tbb/task_group.h>
 
 #include "Camera.h"
 #include "Sphere.h"
+#include "Scene.h"
 
 
 int main()
@@ -14,9 +17,13 @@ int main()
 	size_t width = 60;
 	size_t height = 30;
 
-	Camera camera(Vector3(0.0f, 0.0f, -6.0f));
+	Camera camera(Vector3(0.0f, 0.0f, -9.0f));
 
-	Sphere sphere;
+	Scene scene;
+
+	scene.addIntersectable<Sphere>(Vector3(-2.0f, -1.0f, -2.0f), 1.0f);
+	scene.addIntersectable<Sphere>(Vector3(0.0f, 0.5f, 1.0f), 3.0f);
+	scene.addIntersectable<Sphere>(Vector3(2.0f, -1.0f, -2.0f), 1.0f);
 	
 	for (size_t h = 0; h < height; ++h)
 	{
@@ -25,17 +32,17 @@ int main()
 			float x = (((float(w) + 0.5f) / float(width)) * 2.0f) - 1.0f;
 			float y = (((float(h) + 0.5f) / float(height)) * 2.0f) - 1.0f;
 
-			float t;
-
 			Ray ray = camera.ray(x, y);
 
-			if (sphere.intersect(ray, t))
+			Scene::RayIntersectionResult result;
+
+			if (scene.shootRay(ray, result))
 			{
-				std::cout << "O";
+				std::cout << int(result.distance);
 			}
 			else
 			{
-				std::cout << ".";
+				std::cout << " ";
 			}
 		}
 		std::cout << std::endl;
