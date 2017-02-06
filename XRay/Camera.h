@@ -35,7 +35,7 @@ public:
 	void setFStop(float fStop);
 
 	// x and y are in screen space -1.0 -> 1.0
-	Ray ray(float x, float y);
+	Ray ray(float x, float y) const;
 
 private:
 	Vector3 m_position;

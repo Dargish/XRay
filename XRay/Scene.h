@@ -24,7 +24,7 @@ public:
 	Scene();
 
 	template <typename INTERSECTABLE_TYPE, typename ...Args>
-	std::shared_ptr<INTERSECTABLE_TYPE>& addIntersectable(Args... args);
+	std::shared_ptr<INTERSECTABLE_TYPE> addIntersectable(Args... args);
 
 	bool shootRay(const Ray& ray, RayIntersectionResult& result) const;
 
@@ -33,7 +33,7 @@ private:
 };
 
 template <typename INTERSECTABLE_TYPE, typename ...Args>
-std::shared_ptr<INTERSECTABLE_TYPE>& Scene::addIntersectable(Args... args)
+std::shared_ptr<INTERSECTABLE_TYPE> Scene::addIntersectable(Args... args)
 {
 	m_intersectables.push_back(std::make_shared<INTERSECTABLE_TYPE>(args...));
 	return std::dynamic_pointer_cast<INTERSECTABLE_TYPE>(m_intersectables.back());

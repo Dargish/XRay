@@ -79,7 +79,7 @@ void Camera::setFStop(float fStop_)
 	m_aperture = m_focalLength / m_fStop;
 }
 
-Ray Camera::ray(float x, float y)
+Ray Camera::ray(float x, float y) const
 {
 	Vector3 screenPoint = m_position + m_direction * m_focalLength;
 	screenPoint += m_right * m_aperture * x;
