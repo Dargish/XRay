@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Intersectable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="Intersectable.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Scene.h" />
