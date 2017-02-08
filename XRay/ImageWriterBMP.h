@@ -4,27 +4,32 @@
 #include <iostream>
 
 
-class ImageWriterRGB : public ImageWriter
+class ImageWriterBMP : public ImageWriter
 {
 public:
 	struct BMPFileHeader
 	{
-		unsigned char header[2] = { 'B', 'M' };
-		int32_t filesize;
-		int32_t reserved = 0;
-		int32_t offset = 26;
+		ubyte header0 = 'B';
+		ubyte header1 = 'M';
+		uint32_t filesize;
+		uint32_t reserved = 0;
+		uint32_t offset = 26;
+
+		void write(std::ofstream& f);
 	};
 
-	struct BMPV5Header
+	struct BMPCoreHeader
 	{
 		int32_t headerSize = 12;
 		uint16_t imageWidth;
 		uint16_t imageHeight;
 		uint16_t numPlanes = 1;
-		uint16_t bitsPerPixel = 4;
+		uint16_t bitsPerPixel = 32;
+
+		void write(std::ofstream& f);
 	};
 
-	ImageWriterRGB();
+	ImageWriterBMP();
 
 	virtual void writeImage(const Image& image, const std::string& path) const override;
 };

@@ -6,13 +6,15 @@ Camera::Camera(
 	const Vector3& direction_ /*= Vector3(0.0f, 0.0f, 1.0f)*/,
 	const Vector3& up_ /*= Vector3(0.0f, 1.0f, 0.0f)*/,
 	float focalLength_ /*= 0.028f*/,
-	float fStop_ /*= 2.0f*/
+	float fStop_ /*= 2.0f*/,
+	float aspectRatio_ /*= 1.0f*/
 ) :
 	m_position(position_),
 	m_direction(direction_),
 	m_up(up_),
 	m_focalLength(focalLength_),
-	m_fStop(fStop_)
+	m_fStop(fStop_),
+	m_aspectRatio(aspectRatio_)
 {
 	m_direction.normalize();
 	m_up.normalize();
@@ -44,6 +46,11 @@ float Camera::focalLength() const
 float Camera::fStop() const
 {
 	return m_fStop;
+}
+
+float Camera::aspectRatio() const
+{
+	return m_aspectRatio;
 }
 
 void Camera::setPosition(const Vector3& position_)
@@ -79,10 +86,15 @@ void Camera::setFStop(float fStop_)
 	m_aperture = m_focalLength / m_fStop;
 }
 
+void Camera::setAspectRatio(float aspectRatio_)
+{
+	m_aspectRatio = aspectRatio_;
+}
+
 Ray Camera::ray(float x, float y) const
 {
 	Vector3 screenPoint = m_position + m_direction * m_focalLength;
-	screenPoint += m_right * m_aperture * x;
+	screenPoint += m_right * m_aperture * x * m_aspectRatio;
 	screenPoint -= m_up * m_aperture * y; // Negate Screen Y
 	return Ray(m_position, (screenPoint - m_position).normalize());
 }

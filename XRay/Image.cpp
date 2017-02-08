@@ -33,6 +33,11 @@ size_t Image::height() const
 	return m_height;
 }
 
+float Image::aspectRatio() const
+{
+	return float(m_width) / float(m_height);
+}
+
 float Image::x(size_t w) const
 {
 	return (((float(w) + 0.5f) / float(m_width)) * 2.0f) - 1.0f;

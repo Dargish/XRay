@@ -10,7 +10,9 @@
 #include "Scene.h"
 #include "Image.h"
 #include "RayTracer.h"
-#include "ImageWriterRGB.h"
+#include "ImageWriterBMP.h"
+#include "ImageWriterTGA.h"
+#include "PostProcessToneMap.h"
 
 
 int main()
@@ -27,15 +29,22 @@ int main()
 	scene.addIntersectable<Sphere>(Vector3(0.0f, 0.5f, 1.0f), 3.0f);
 	scene.addIntersectable<Sphere>(Vector3(2.0f, -1.0f, -2.0f), 1.0f);
 
-	Image image(60, 30);
+	Image image(800, 600);
+
+	camera.setAspectRatio(image.aspectRatio());
 
 	RayTracer rayTracer;
 
 	rayTracer.traceImage(scene, camera, image);
 
-	ImageWriterRGB writer;
+	PostProcessStack postProcessStack;
+	PostProcessToneMapPtr toneMap = postProcessStack.push<PostProcessToneMap>();
 
-	std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render.bmp";
+	postProcessStack.process(image);
+
+	ImageWriterBMP writer;
+
+	std::string renderpath = "E:\\GitHub\\XRay\\render.bmp";
 
 	writer.writeImage(image, renderpath);
 

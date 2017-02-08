@@ -5,6 +5,8 @@
 #include <string>
 
 
+typedef unsigned char ubyte;
+
 class ImageWriter
 {
 public:

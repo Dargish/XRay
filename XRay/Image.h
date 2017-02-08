@@ -24,6 +24,8 @@ public:
 	size_t width() const;
 	size_t height() const;
 
+	float aspectRatio() const;
+
 	float x(size_t w) const;
 	float y(size_t h) const;
 
