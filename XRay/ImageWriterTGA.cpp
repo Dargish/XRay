@@ -46,7 +46,7 @@ void ImageWriterTGA::writeImage(const Image& image, const std::string& path) con
 	{
 		for (size_t w = 0; w < image.width(); ++w)
 		{
-			const Image::Pixel& p = image.pixel(w, h - 1);
+			const Image::Color& p = image.pixel(w, h - 1);
 			uint8_t pd[] = { (uint8_t)(p.r * 255), (uint8_t)(p.g * 255), (uint8_t)(p.b * 255), (uint8_t)(p.a * 255) };
 			f.write((const char*)pd, 4);
 		}
