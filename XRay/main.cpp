@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "Image.h"
 #include "RayTracer.h"
+#include "ShaderLambert.h"
 #include "ImageWriterBMP.h"
 #include "ImageWriterTGA.h"
 #include "PostProcessToneMap.h"
@@ -23,11 +24,13 @@ int main()
 
 	Camera camera(Vector3(0.0f, 0.0f, -9.0f));
 
+	ShaderPtr shader(new ShaderLambert(RGB(1.0f, 0.5f, 1.0f), 0.5f));
+
 	Scene scene;
 
-	scene.addIntersectable<Sphere>(Vector3(-2.0f, -1.0f, -2.0f), 1.0f);
-	scene.addIntersectable<Sphere>(Vector3(0.0f, 0.5f, 1.0f), 3.0f);
-	scene.addIntersectable<Sphere>(Vector3(2.0f, -1.0f, -2.0f), 1.0f);
+	scene.addIntersectable<Sphere>(Vector3(-2.0f, -1.0f, -2.0f), 1.0f)->setShader(shader);
+	scene.addIntersectable<Sphere>(Vector3(0.0f, 0.5f, 1.0f), 3.0f)->setShader(shader);
+	scene.addIntersectable<Sphere>(Vector3(2.0f, -1.0f, -2.0f), 1.0f)->setShader(shader);
 
 	Image image(800, 600);
 
@@ -38,7 +41,7 @@ int main()
 	rayTracer.traceImage(scene, camera, image);
 
 	PostProcessStack postProcessStack;
-	PostProcessToneMapPtr toneMap = postProcessStack.push<PostProcessToneMap>();
+	//PostProcessToneMapPtr toneMap = postProcessStack.push<PostProcessToneMap>();
 
 	postProcessStack.process(image);
 

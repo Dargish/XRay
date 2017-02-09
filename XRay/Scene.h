@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Intersectable.h"
+#include "fwd.h"
+#include "Vector3.h"
 
 #include <vector>
-#include <memory>
 #include <limits>
+#include <memory>
 
-typedef std::shared_ptr<Intersectable> IntersectablePtr;
+
 typedef std::vector<IntersectablePtr> IntersectablePtrs;
 
 
@@ -15,10 +16,8 @@ class Scene
 public:
 	struct RayIntersectionResult
 	{
-		float distance;
 		IntersectablePtr intersectable;
-
-		RayIntersectionResult(float maxDistance = std::numeric_limits<float>::max());
+		Vector3 normal;
 	};
 
 	Scene();
@@ -26,7 +25,7 @@ public:
 	template <typename INTERSECTABLE_TYPE, typename ...Args>
 	std::shared_ptr<INTERSECTABLE_TYPE> addIntersectable(Args... args);
 
-	bool shootRay(const Ray& ray, RayIntersectionResult& result) const;
+	bool shootRay(Ray& ray, RayIntersectionResult& result) const;
 
 private:
 	IntersectablePtrs m_intersectables;

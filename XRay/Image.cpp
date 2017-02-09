@@ -1,52 +1,18 @@
 #include "Image.h"
 
 
-Image::Color::Color(float r_ /*= 0.0f*/, float g_ /*= 0.0f*/, float b_ /*= 0.0f*/, float a_ /*= 0.0f*/) :
-	r(r_), g(g_), b(b_), a(a_)
-{
-
-}
-
-Image::Color& Image::Color::operator+=(const Color& other)
-{
-	r += other.r;
-	g += other.g;
-	b += other.b;
-	a += other.a;
-	return *this;
-}
-
-Image::Color Image::Color::operator+(const Color& other) const
-{
-	return Color(r + other.r, g + other.g, b + other.b, a + other.a);
-}
-
-Image::Color& Image::Color::operator/=(float value)
-{
-	r /= value;
-	g /= value;
-	b /= value;
-	a /= value;
-	return *this;
-}
-
-Image::Color Image::Color::operator/(float value) const
-{
-	return Color(r / value, g / value, b / value, a / value);
-}
-
 Image::Image(size_t width /*= 0*/, size_t height /*= 0*/) :
 	m_width(width), m_height(height), m_pixels(m_width * m_height)
 {
 	
 }
 
-Image::Color& Image::pixel(size_t w, size_t h)
+RGBA& Image::pixel(size_t w, size_t h)
 {
 	return m_pixels[h * m_width + w];
 }
 
-const Image::Color& Image::pixel(size_t w, size_t h) const
+const RGBA& Image::pixel(size_t w, size_t h) const
 {
 	return m_pixels[h * m_width + w];
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Image.h"
+#include "fwd.h"
 
 #include <memory>
 #include <vector>
@@ -16,7 +16,6 @@ public:
 	virtual void process(Image& image) const = 0;
 };
 
-typedef std::shared_ptr<PostProcess> PostProcessPtr;
 typedef std::vector<PostProcessPtr> PostProcessPtrs;
 
 class PostProcessStack

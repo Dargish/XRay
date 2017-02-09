@@ -1,11 +1,17 @@
 #include "RayTracer.h"
+#include "Scene.h"
+#include "Camera.h"
+#include "Image.h"
+#include "Ray.h"
+#include "Shader.h"
+#include "Intersectable.h"
 
 #include <tbb/task_group.h>
 #include <tbb/parallel_for.h>
 
 
 RayTracer::RayTracer() :
-	m_raysPerPixel(64)
+	m_raysPerPixel(8)
 {
 
 }
@@ -39,12 +45,13 @@ void RayTracer::tracePixel(const Scene& scene, const Camera& camera, Image& imag
 
 	float fRandMax = float(RAND_MAX);
 
-	Image::Color result;
+	RGBA result(0.0f, 0.0f, 0.0f, 0.0f);
 
 	tbb::parallel_for(size_t(0), m_raysPerPixel, [&](size_t r) {
 		float randX = (float(std::rand()) / fRandMax) - 0.5f;
 		float randY = (float(std::rand()) / fRandMax) - 0.5f;
 		Ray ray = camera.ray(x + randX * dx, y + randY * dy);
+		ray.childCount = m_raysPerPixel / 2;
 		result += traceRay(scene, ray);
 	});
 
@@ -54,16 +61,21 @@ void RayTracer::tracePixel(const Scene& scene, const Camera& camera, Image& imag
 	image.pixel(w, h) = result;
 }
 
-Image::Color RayTracer::traceRay(const Scene& scene, const Ray& ray) const
+RGBA RayTracer::traceRay(const Scene& scene, Ray& ray) const
 {
-	Image::Color result;
+	RGBA result(0.0f, 0.0f, 0.0f, 0.0f);
 	Scene::RayIntersectionResult intersectionResult;
 	if (scene.shootRay(ray, intersectionResult))
 	{
-		result.r = intersectionResult.distance;
-		result.g = intersectionResult.distance;
-		result.b = intersectionResult.distance;
-		result.a = 1.0;
+		if (intersectionResult.intersectable->shader())
+		{
+			Vector3 P = ray.origin + ray.direction * ray.distance;
+			result = intersectionResult.intersectable->shader()->shade(scene, ray, P, intersectionResult.normal);
+		}
+		else
+		{
+			result.a = 1.0;
+		}
 	}
 	return result;
 }

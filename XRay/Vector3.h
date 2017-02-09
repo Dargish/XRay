@@ -33,6 +33,12 @@ public:
 	Vector3& normalize();
 	Vector3 normalized() const;
 
+	void orthogonalVectors(Vector3& u, Vector3& v) const;
+
+	Vector3 randomRay(float coneRadAngle) const;
+
+	static Vector3 RandomRay(const Vector3& a, const Vector3& u, const Vector3& v, float coneRadAngle);
+
 	friend std::ostream& operator<<(std::ostream& os, const Vector3& vec);
 };
 

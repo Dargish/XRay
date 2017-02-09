@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Scene.h"
-#include "Camera.h"
-#include "Image.h"
+#include "fwd.h"
 
 class RayTracer
 {
@@ -16,7 +14,7 @@ public:
 
 private:
 	void tracePixel(const Scene& scene, const Camera& camera, Image& image, size_t w, size_t h) const;
-	Image::Color traceRay(const Scene& scene, const Ray& ray) const;
+	RGBA traceRay(const Scene& scene, Ray& ray) const;
 
 	size_t m_raysPerPixel;
 };

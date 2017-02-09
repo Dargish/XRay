@@ -1,28 +1,26 @@
 #include "Scene.h"
+#include "Ray.h"
+#include "Intersectable.h"
 
-
-Scene::RayIntersectionResult::RayIntersectionResult(float maxDistance /*= std::numeric_limits<float>::max()*/) :
-	distance(maxDistance)
-{
-
-}
 
 Scene::Scene()
 {
 
 }
 
-bool Scene::shootRay(const Ray& ray, RayIntersectionResult& result) const
+bool Scene::shootRay(Ray& ray, RayIntersectionResult& result) const
 {
 	for (const IntersectablePtr& intersectable : m_intersectables)
 	{
 		float t;
-		if (intersectable->intersect(ray, t))
+		Vector3 normal;
+		if (intersectable->intersect(ray, t, normal))
 		{
-			if (t < result.distance)
+			if (t < ray.distance)
 			{
-				result.distance = t;
+				ray.distance = t;
 				result.intersectable = intersectable;
+				result.normal = normal;
 			}
 		}
 	}

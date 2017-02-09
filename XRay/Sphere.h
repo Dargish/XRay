@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Intersectable.h"
+#include "Vector3.h"
 
 
 class Sphere : public Intersectable
@@ -14,6 +15,6 @@ public:
 		float radius = 1.0f
 	);
 
-	virtual bool intersect(const Ray& ray, float& t) const override;
+	virtual bool intersect(const Ray& ray, float& t, Vector3& normal) const override;
 };
 

@@ -167,6 +167,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="RGB.cpp" />
+    <ClCompile Include="RGBA.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageWriterBMP.cpp" />
     <ClCompile Include="ImageWriterTGA.cpp" />
@@ -177,11 +179,16 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayTracer.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="ShaderLambert.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="fwd.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="RGB.h" />
+    <ClInclude Include="RGBA.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageWriter.h" />
     <ClInclude Include="ImageWriterBMP.h" />
@@ -192,6 +199,8 @@
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RayTracer.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderLambert.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>

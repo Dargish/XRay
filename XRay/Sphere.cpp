@@ -1,4 +1,5 @@
 #include "Sphere.h"
+#include "Ray.h"
 
 #include <cmath>
 
@@ -12,7 +13,7 @@ Sphere::Sphere(
 
 }
 
-bool Sphere::intersect(const Ray& ray, float& t) const
+bool Sphere::intersect(const Ray& ray, float& t, Vector3& normal) const
 {
 	Vector3 offset = ray.origin - center;
 
@@ -47,6 +48,7 @@ bool Sphere::intersect(const Ray& ray, float& t) const
 		}
 
 		t = t0;
+		normal = ((ray.origin + ray.direction * t) - center).normalize();
 
 		return true;
 	}

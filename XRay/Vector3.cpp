@@ -1,6 +1,5 @@
 #include "Vector3.h"
-
-#include <cmath>
+#include "Math.h"
 
 
 Vector3::Vector3(
@@ -121,6 +120,48 @@ Vector3 Vector3::normalized() const
 	{
 		return Vector3(x, y, z);
 	}
+}
+
+void Vector3::orthogonalVectors(Vector3& u, Vector3& v) const
+{
+	if (x < y)
+	{
+		if (x < z)
+		{
+			u = cross(Vector3(1, 0, 0));
+		}
+		else
+		{
+			u = cross(Vector3(0, 0, 1));
+		}
+	}
+	else
+	{
+		if (y < z)
+		{
+			u = cross(Vector3(0, 1, 0));
+		}
+		else
+		{
+			u = cross(Vector3(0, 0, 1));
+		}
+	}
+	v = cross(u);
+}
+
+Vector3 Vector3::randomRay(float coneRadAngle) const
+{
+	Vector3 u, v;
+	orthogonalVectors(u, v);
+	return RandomRay(*this, u, v, coneRadAngle);
+}
+
+Vector3 Vector3::RandomRay(const Vector3& a, const Vector3& u, const Vector3& v, float coneRadAngle)
+{
+	float fRandMax = float(RAND_MAX);
+	float theta = (float(std::rand()) / fRandMax) * coneRadAngle;
+	float phi = (float(std::rand()) / fRandMax) * PI_2F - PI_F;
+	return (u * std::cosf(phi) + v * std::sinf(phi)) * std::sinf(theta) + (a * std::cosf(theta));
 }
 
 std::ostream& operator<<(std::ostream& os, const Vector3& vec)

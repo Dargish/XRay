@@ -1,14 +1,18 @@
 #pragma once
 
-#include "Ray.h"
-
+#include "fwd.h"
 
 class Intersectable
 {
 public:
-	Intersectable();
 	virtual ~Intersectable();
 
-	virtual bool intersect(const Ray& ray, float& t) const = 0;
+	const ShaderPtr& shader() const;
+	void setShader(const ShaderPtr& shader);
+
+	virtual bool intersect(const Ray& ray, float& t, Vector3& normal) const = 0;
+
+private:
+	ShaderPtr m_shader;
 };
 
