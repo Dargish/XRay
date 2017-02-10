@@ -11,7 +11,7 @@
 
 
 RayTracer::RayTracer() :
-	m_raysPerPixel(8)
+	m_raysPerPixel(32)
 {
 
 }
@@ -69,8 +69,7 @@ RGBA RayTracer::traceRay(const Scene& scene, Ray& ray) const
 	{
 		if (intersectionResult.intersectable->shader())
 		{
-			Vector3 P = ray.origin + ray.direction * ray.distance;
-			result = intersectionResult.intersectable->shader()->shade(scene, ray, P, intersectionResult.normal);
+			result = intersectionResult.intersectable->shader()->shade(scene, ray, intersectionResult.normal);
 		}
 		else
 		{

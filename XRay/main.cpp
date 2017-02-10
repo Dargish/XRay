@@ -24,7 +24,7 @@ int main()
 
 	Camera camera(Vector3(0.0f, 0.0f, -9.0f));
 
-	ShaderPtr shader(new ShaderLambert(RGB(1.0f, 0.5f, 1.0f), 0.5f));
+	ShaderPtr shader(new ShaderLambert(RGB(1.0f, 0.5f, 1.0f), 0.05f));
 
 	Scene scene;
 
@@ -45,13 +45,17 @@ int main()
 
 	postProcessStack.process(image);
 
-	ImageWriterBMP writer;
+	ImageWriterBMP writerBMP;
+	std::string renderpathBMP = "E:\\GitHub\\XRay\\render.bmp";
+	writerBMP.writeImage(image, renderpathBMP);
 
-	std::string renderpath = "E:\\GitHub\\XRay\\render.bmp";
+	ImageWriterTGA writerTGA;
+	std::string renderpathTGA = "E:\\GitHub\\XRay\\render.tga";
+	writerTGA.writeImage(image, renderpathTGA);
 
-	writer.writeImage(image, renderpath);
 
-	std::cout << "Wrote render to " << renderpath << std::endl;
+	std::cout << "Wrote render to " << renderpathBMP << std::endl;
+	std::cout << "Wrote render to " << renderpathTGA << std::endl;
 
 	return 0;
 }

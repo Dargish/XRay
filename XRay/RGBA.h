@@ -21,4 +21,7 @@ struct RGBA
 	RGBA operator*(float value) const;
 	RGBA& operator/=(float value);
 	RGBA operator/(float value) const;
+
+	RGBA& saturate();
+	RGBA saturated() const;
 };

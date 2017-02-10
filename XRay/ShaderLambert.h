@@ -14,7 +14,7 @@ public:
 	float roughness() const;
 	void setRoughness(float roughness);
 
-	RGBA shade(const Scene& scene, const Ray& ray, const Vector3& P, const Vector3& N) const override;
+	RGBA shade(const Scene& scene, const Ray& ray, const Vector3& N) const override;
 
 private:
 	RGB m_diffuse;

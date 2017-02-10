@@ -16,4 +16,7 @@ struct RGB
 	RGB operator*(float value) const;
 	RGB& operator/=(float value);
 	RGB operator/(float value) const;
+
+	RGB& saturate();
+	RGB saturated() const;
 };

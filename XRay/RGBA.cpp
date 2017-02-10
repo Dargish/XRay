@@ -1,5 +1,7 @@
 #include "RGBA.h"
 
+#include <algorithm>
+
 
 RGBA::RGBA(float r_ /*= 0.0f*/, float g_ /*= 0.0f*/, float b_ /*= 0.0f*/, float a_ /*= 1.0f*/) :
 	r(r_), g(g_), b(b_), a(a_)
@@ -76,4 +78,23 @@ RGBA& RGBA::operator/=(float value)
 RGBA RGBA::operator/(float value) const
 {
 	return RGBA(r / value, g / value, b / value, a / value);
+}
+
+RGBA& RGBA::saturate()
+{
+	r = std::max(0.0f, r);
+	g = std::max(0.0f, g);
+	b = std::max(0.0f, b);
+	a = std::max(0.0f, a);
+	return *this;
+}
+
+RGBA RGBA::saturated() const
+{
+	return RGBA(
+		std::max(0.0f, r),
+		std::max(0.0f, g),
+		std::max(0.0f, b),
+		std::max(0.0f, a)
+	);
 }

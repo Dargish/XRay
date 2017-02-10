@@ -39,19 +39,21 @@ void ShaderLambert::setRoughness(float roughness_)
 	m_roughness = roughness_;
 }
 
-RGBA ShaderLambert::shade(const Scene& scene, const Ray& ray, const Vector3& P, const Vector3& N) const
+RGBA ShaderLambert::shade(const Scene& scene, const Ray& ray, const Vector3& N) const
 {
+	Vector3 P = ray.origin + ray.direction * ray.distance;
+
 	float NoV = N.dot(ray.direction);
 	Vector3 R = (ray.direction - N * NoV * 2.0f).normalize();
 
-	RGBA reflection(0.0f, 0.0f, 0.0f, 0.0f);
-
 	if (ray.childCount > 0)
 	{
+		RGBA reflection(0.0f, 0.0f, 0.0f, 0.0f);
+
 		Vector3 u, v;
 		R.orthogonalVectors(u, v);
 
-		float coneRadAngle = (1.0f - m_roughness) * PI_F;
+		float coneRadAngle = m_roughness * PI_F;
 
 		tbb::parallel_for(size_t(0), ray.childCount, [&](size_t r) {
 			Vector3 randR = Vector3::RandomRay(R, u, v, coneRadAngle);
@@ -62,8 +64,7 @@ RGBA ShaderLambert::shade(const Scene& scene, const Ray& ray, const Vector3& P, 
 			{
 				if (intersectionResult.intersectable->shader())
 				{
-					Vector3 P = thisRay.origin + thisRay.direction * thisRay.distance;
-					reflection += intersectionResult.intersectable->shader()->shade(scene, thisRay, P, intersectionResult.normal);
+					reflection += intersectionResult.intersectable->shader()->shade(scene, thisRay, intersectionResult.normal);
 				}
 				else
 				{
@@ -71,13 +72,16 @@ RGBA ShaderLambert::shade(const Scene& scene, const Ray& ray, const Vector3& P, 
 				}
 			}
 		});
-		reflection /= ray.childCount;
+		reflection /= (float)ray.childCount;
+		return (reflection * (1.0f + NoV) + m_diffuse * -NoV).saturate();
 	}
 	else
 	{
-		reflection = RGBA(0.5f, 0.5f, 0.5f, 0.5f);
+		// Todo: Diffuse lighting
+		return m_diffuse;
 	}
 
-	
-	return reflection + m_diffuse * (1.0f + NoV);
+	//return RGBA(N.x, N.y, N.z, 1.0f);
+	//return RGBA(R.x, R.y, R.z, 1.0f);
+	//return (reflection * (1.0f - NoV) + m_diffuse * NoV).saturate();
 }
