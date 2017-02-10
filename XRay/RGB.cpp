@@ -35,6 +35,32 @@ RGB RGB::operator-(const RGB& other) const
 	return RGB(r - other.r, g - other.g, b - other.b);
 }
 
+RGB& RGB::operator*=(const RGB& other)
+{
+	r *= other.r;
+	g *= other.g;
+	b *= other.b;
+	return *this;
+}
+
+RGB RGB::operator*(const RGB& other) const
+{
+	return RGB(r * other.r, g * other.g, b * other.b);
+}
+
+RGB& RGB::operator/=(const RGB& other)
+{
+	r /= other.r;
+	g /= other.g;
+	b /= other.b;
+	return *this;
+}
+
+RGB RGB::operator/(const RGB& other) const
+{
+	return RGB(r / other.r, g / other.g, b / other.b);
+}
+
 RGB& RGB::operator*=(float value)
 {
 	r *= value;

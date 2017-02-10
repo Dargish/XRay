@@ -1,4 +1,5 @@
 #include "RGBA.h"
+#include "RGB.h"
 
 #include <algorithm>
 
@@ -50,6 +51,60 @@ RGBA& RGBA::operator-=(const RGBA& other)
 RGBA RGBA::operator-(const RGBA& other) const
 {
 	return RGBA(r - other.r, g - other.g, b - other.b, a - other.a);
+}
+
+RGBA& RGBA::operator*=(const RGBA& other)
+{
+	r *= other.r;
+	g *= other.g;
+	b *= other.b;
+	a *= other.a;
+	return *this;
+}
+
+RGBA RGBA::operator*(const RGBA& other) const
+{
+	return RGBA(r * other.r, g * other.g, b * other.b, a * other.a);
+}
+
+RGBA& RGBA::operator/=(const RGBA& other)
+{
+	r /= other.r;
+	g /= other.g;
+	b /= other.b;
+	a /= other.a;
+	return *this;
+}
+
+RGBA RGBA::operator/(const RGBA& other) const
+{
+	return RGBA(r / other.r, g / other.g, b / other.b, a / other.a);
+}
+
+RGBA& RGBA::operator*=(const RGB& value)
+{
+	r *= value.r;
+	g *= value.g;
+	b *= value.b;
+	return *this;
+}
+
+RGBA RGBA::operator*(const RGB& value) const
+{
+	return RGBA(r * value.r, g * value.g, b * value.b, a);
+}
+
+RGBA& RGBA::operator/=(const RGB& value)
+{
+	r /= value.r;
+	g /= value.g;
+	b /= value.b;
+	return *this;
+}
+
+RGBA RGBA::operator/(const RGB& value) const
+{
+	return RGBA(r / value.r, g / value.g, b / value.b, a);
 }
 
 RGBA& RGBA::operator*=(float value)

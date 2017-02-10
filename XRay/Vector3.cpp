@@ -11,6 +11,24 @@ Vector3::Vector3(
 
 }
 
+bool Vector3::operator==(const Vector3& other) const
+{
+	return (
+		fequals(x, other.x) &&
+		fequals(y, other.y) &&
+		fequals(z, other.z)
+		);
+}
+
+bool Vector3::operator!=(const Vector3& other) const
+{
+	return (
+		!fequals(x, other.x) ||
+		!fequals(y, other.y) ||
+		!fequals(z, other.z)
+		);
+}
+
 Vector3 Vector3::operator+(const Vector3& other) const
 {
 	return Vector3(x + other.x, y + other.y, z + other.z);
@@ -95,6 +113,14 @@ Vector3 Vector3::cross(const Vector3& other) const
 		z * other.x - x * other.z,
 		x * other.y - y * other.x
 	);
+}
+
+Vector3 Vector3::reflect(const Vector3& normal) const
+{
+	float d = dot(normal);
+	Vector3 r(*this);
+	r -= normal * d * 2.0f;
+	return r.normalize();
 }
 
 Vector3& Vector3::normalize()

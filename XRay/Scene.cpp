@@ -8,8 +8,9 @@ Scene::Scene()
 
 }
 
-bool Scene::shootRay(Ray& ray, RayIntersectionResult& result) const
+bool Scene::shootRay(Ray& ray, RayIntersectionResult* result /*= NULL*/) const
 {
+	bool hit = false;
 	for (const IntersectablePtr& intersectable : m_intersectables)
 	{
 		float t;
@@ -19,10 +20,14 @@ bool Scene::shootRay(Ray& ray, RayIntersectionResult& result) const
 			if (t < ray.distance)
 			{
 				ray.distance = t;
-				result.intersectable = intersectable;
-				result.normal = normal;
+				if (result)
+				{
+					result->intersectable = intersectable;
+					result->normal = normal;
+					hit = true;
+				}
 			}
 		}
 	}
-	return bool(result.intersectable);
+	return hit;
 }

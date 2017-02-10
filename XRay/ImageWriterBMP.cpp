@@ -63,7 +63,7 @@ void ImageWriterBMP::writeImage(const Image& image, const std::string& path) con
 		for (size_t w = 0; w < image.width(); ++w)
 		{
 			const RGBA& p = image.pixel(w, h - 1);
-			uint8_t pd[] = { (uint8_t)(saturate(p.b) * 255), (uint8_t)(saturate(p.g) * 255), (uint8_t)(saturate(p.r) * 255), (uint8_t)(saturate(p.a) * 255) };
+			uint8_t pd[] = { (uint8_t)(clamp(p.b) * 255), (uint8_t)(clamp(p.g) * 255), (uint8_t)(clamp(p.r) * 255), (uint8_t)(clamp(p.a) * 255) };
 			f.write((const char*)pd, 4);
 		}
 	}

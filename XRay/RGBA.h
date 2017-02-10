@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RGB.h"
+#include "fwd.h"
 
 
 struct RGBA
@@ -17,6 +17,14 @@ struct RGBA
 	RGBA operator+(const RGBA& other) const;
 	RGBA& operator-=(const RGBA& other);
 	RGBA operator-(const RGBA& other) const;
+	RGBA& operator*=(const RGBA& other);
+	RGBA operator*(const RGBA& other) const;
+	RGBA& operator/=(const RGBA& other);
+	RGBA operator/(const RGBA& other) const;
+	RGBA& operator*=(const RGB& value);
+	RGBA operator*(const RGB& value) const;
+	RGBA& operator/=(const RGB& value);
+	RGBA operator/(const RGB& value) const;
 	RGBA& operator*=(float value);
 	RGBA operator*(float value) const;
 	RGBA& operator/=(float value);

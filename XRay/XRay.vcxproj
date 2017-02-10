@@ -167,6 +167,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="LightDirectional.cpp" />
     <ClCompile Include="RGB.cpp" />
     <ClCompile Include="RGBA.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -186,6 +187,8 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="fwd.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="LightDirectional.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="RGB.h" />
     <ClInclude Include="RGBA.h" />

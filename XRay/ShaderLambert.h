@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Shader.h"
+#include "RGB.h"
 
 class ShaderLambert : public Shader
 {
@@ -14,7 +15,7 @@ public:
 	float roughness() const;
 	void setRoughness(float roughness);
 
-	RGBA shade(const Scene& scene, const Ray& ray, const Vector3& N) const override;
+	RGBA shade(const RayTracer& rayTracer, const Ray& ray, const Vector3& normal) const override;
 
 private:
 	RGB m_diffuse;

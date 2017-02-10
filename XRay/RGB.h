@@ -12,6 +12,10 @@ struct RGB
 	RGB operator+(const RGB& other) const;
 	RGB& operator-=(const RGB& other);
 	RGB operator-(const RGB& other) const;
+	RGB& operator*=(const RGB& other);
+	RGB operator*(const RGB& other) const;
+	RGB& operator/=(const RGB& other);
+	RGB operator/(const RGB& other) const;
 	RGB& operator*=(float value);
 	RGB operator*(float value) const;
 	RGB& operator/=(float value);
