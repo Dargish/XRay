@@ -8,6 +8,16 @@ Scene::Scene()
 
 }
 
+const IntersectablePtrs& Scene::intersectables() const
+{
+	return m_intersectables;
+}
+
+const LightPtrs& Scene::lights() const
+{
+	return m_lights;
+}
+
 bool Scene::shootRay(Ray& ray, RayIntersectionResult* result /*= NULL*/) const
 {
 	bool hit = false;
@@ -17,6 +27,7 @@ bool Scene::shootRay(Ray& ray, RayIntersectionResult* result /*= NULL*/) const
 		Vector3 normal;
 		if (intersectable->intersect(ray, t, normal))
 		{
+			hit = true;
 			if (t < ray.distance)
 			{
 				ray.distance = t;
@@ -24,7 +35,6 @@ bool Scene::shootRay(Ray& ray, RayIntersectionResult* result /*= NULL*/) const
 				{
 					result->intersectable = intersectable;
 					result->normal = normal;
-					hit = true;
 				}
 			}
 		}

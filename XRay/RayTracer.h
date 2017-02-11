@@ -15,7 +15,16 @@ public:
 
 	void traceImage(const Camera& camera, Image& image) const;
 
-	RGBA traceRays(float coneRadAngle, Ray& ray, const Vector3& planeNormal = Vector3()) const;
+	// Purely hit detection tests
+
+	// How many rays intersect from 0.0f to 1.0f
+	float shootRays(Ray& ray, float coneRadAngle, const Vector3& planeNormal = Vector3()) const;
+
+	// True if the ray intersects
+	bool shootRay(Ray& ray) const;
+
+	// Evaluate surface colour on closest intersection
+	RGBA traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNormal = Vector3()) const;
 	RGBA traceRay(Ray& ray) const;
 
 	RGB lightAtPoint(const Vector3& position, const Vector3& normal) const;

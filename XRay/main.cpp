@@ -11,14 +11,24 @@
 #include "Image.h"
 #include "RayTracer.h"
 #include "ShaderLambert.h"
+#include "LightDirectional.h"
 #include "ImageWriterBMP.h"
 #include "ImageWriterTGA.h"
 #include "PostProcessToneMap.h"
 
+#include <chrono>
+typedef std::chrono::high_resolution_clock Clock;
+
 
 int main()
 {
-	tbb::task_scheduler_init init;
+	auto t1 = Clock::now();
+
+	int numThreads = tbb::task_scheduler_init::default_num_threads() - 1;
+
+	std::cout << "Rendering using " << numThreads << " cores" << std::endl;
+
+	tbb::task_scheduler_init init(numThreads);
 
 	tbb::task_group group;
 
@@ -28,15 +38,17 @@ int main()
 
 	ScenePtr scene(new Scene);
 
+	scene->addLight<LightDirectional>(Vector3(-0.5f, -0.5f, 1.0f).normalize(), RGBA(1.0f, 1.0f, 1.0f, 2.0f), 16, 0.05f);
+
 	scene->addIntersectable<Sphere>(Vector3(-2.0f, -1.0f, -3.0f), 1.0f)->setShader(shader);
 	scene->addIntersectable<Sphere>(Vector3(0.0f, 0.5f, 1.0f), 3.0f)->setShader(shader);
-	scene->addIntersectable<Sphere>(Vector3(2.0f, -1.0f, -3.0f), 1.0f)->setShader(shader);
+	scene->addIntersectable<Sphere>(Vector3(2.5f, 1.0f, -5.0f), 1.0f)->setShader(shader);
 
 	Image image(800, 600);
 
 	camera.setAspectRatio(image.aspectRatio());
 
-	RayTracer rayTracer(scene, 16);
+	RayTracer rayTracer(scene, 32);
 
 	rayTracer.traceImage(camera, image);
 
@@ -45,8 +57,8 @@ int main()
 
 	postProcessStack.process(image);
 
-	std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render_with_lighting";
-	//std::string renderpath = "E:\\GitHub\\XRay\\render";
+	//std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render";
+	std::string renderpath = "E:\\GitHub\\XRay\\render";
 
 	ImageWriterBMP writerBMP;
 	writerBMP.writeImage(image, renderpath + ".bmp");
@@ -56,6 +68,11 @@ int main()
 
 	std::cout << "Wrote render to " << renderpath << ".bmp" << std::endl;
 	std::cout << "Wrote render to " << renderpath << ".tga" << std::endl;
+
+	auto t2 = Clock::now();
+	std::cout << "Render time: "
+		<< double(std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count()) / 1000.0
+		<< " seconds" << std::endl;
 
 	return 0;
 }

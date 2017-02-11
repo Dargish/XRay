@@ -4,10 +4,10 @@
 Ray::Ray(
 	const Vector3& origin_ /*= Vector3(0.0f, 0.0f, 0.0f)*/,
 	const Vector3& direction_ /*= Vector3(0.0f, 0.0f, 0.0f)*/,
-	float distance_ /*= std::numeric_limits<float>::max()*/,
-	size_t childCount_ /*= 0*/
+	size_t childCount_ /*= 0*/,
+	float distance_ /*= std::numeric_limits<float>::max()*/
 ) :
-	origin(origin_), direction(direction_), distance(distance_), childCount(childCount_)
+	origin(origin_), direction(direction_), childCount(childCount_), distance(distance_)
 {
 
 }

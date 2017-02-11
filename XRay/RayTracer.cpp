@@ -42,7 +42,41 @@ void RayTracer::traceImage(const Camera& camera, Image& image) const
 	});
 }
 
-RGBA RayTracer::traceRays(float coneRadAngle, Ray& ray, const Vector3& planeNormal /*= Vector3()*/) const
+float RayTracer::shootRays(Ray& ray, float coneRadAngle, const Vector3& planeNormal /*= Vector3()*/) const
+{
+	float result = 0.0f;
+	Vector3 u, v;
+	ray.direction.orthogonalVectors(u, v);
+
+	bool reflectOffNormalPlane = planeNormal != Vector3();
+
+	tbb::parallel_for(size_t(0), ray.childCount, [&](size_t r) {
+		Ray thisRay(ray.origin);
+		thisRay.direction = Vector3::RandomRay(ray.direction, u, v, coneRadAngle);
+		// Check against normal plane to ensure rays don't shoot under the surface of it
+		int limit = 50; // Make sure this doesn't go on forever
+		while (reflectOffNormalPlane && planeNormal.dot(thisRay.direction) < 0.0f && --limit > 0)
+		{
+			// Just search for another random ray and hope it's above the surface
+			thisRay.direction = Vector3::RandomRay(ray.direction, u, v, coneRadAngle);
+		}
+		if (m_scene->shootRay(thisRay))
+		{
+			result += 1.0f;
+		}
+	});
+
+	result /= (float)ray.childCount;
+
+	return result;
+}
+
+bool RayTracer::shootRay(Ray& ray) const
+{
+	return m_scene->shootRay(ray);
+}
+
+RGBA RayTracer::traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNormal /*= Vector3()*/) const
 {
 	if (coneRadAngle < 0.0001f)
 	{

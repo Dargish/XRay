@@ -52,8 +52,7 @@ RGBA ShaderLambert::shade(const RayTracer& rayTracer, const Ray& ray, const Vect
 	// Reflection
 	if (ray.childCount > 0)
 	{
-		Ray reflectRay(position, reflect);
-		reflectRay.childCount = ray.childCount / 2;
+		Ray reflectRay(position, reflect, ray.childCount / 2);
 		if (ray.childCount == 1)
 		{
 			reflection = rayTracer.traceRay(reflectRay);
@@ -62,7 +61,7 @@ RGBA ShaderLambert::shade(const RayTracer& rayTracer, const Ray& ray, const Vect
 		{
 			// * 0.5f to limit to forward facing hemisphere
 			float coneRadAngle = m_roughness * PI_F * 0.5f;
-			reflection = rayTracer.traceRays(coneRadAngle, reflectRay, normal);
+			reflection = rayTracer.traceRays(reflectRay, coneRadAngle, normal);
 		}
 	}
 
