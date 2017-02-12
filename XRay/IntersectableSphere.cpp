@@ -1,10 +1,10 @@
-#include "Sphere.h"
+#include "IntersectableSphere.h"
 #include "Ray.h"
 
 #include <cmath>
 
 
-Sphere::Sphere(
+IntersectableSphere::IntersectableSphere(
 	Vector3 center_ /*= Vector3(0.0f, 0.0f, 0.0f)*/,
 	float radius_ /*= 1.0f*/
 ) :
@@ -13,7 +13,7 @@ Sphere::Sphere(
 
 }
 
-bool Sphere::intersect(const Ray& ray, float& t, Vector3& normal) const
+bool IntersectableSphere::intersect(const Ray& ray, float& t, Vector3& normal) const
 {
 	Vector3 offset = ray.origin - center;
 

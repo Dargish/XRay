@@ -4,13 +4,13 @@
 #include "Vector3.h"
 
 
-class Sphere : public Intersectable
+class IntersectableSphere : public Intersectable
 {
 public:
 	Vector3 center;
 	float radius;
 
-	Sphere(
+	IntersectableSphere(
 		Vector3 center = Vector3(0.0f, 0.0f, 0.0f),
 		float radius = 1.0f
 	);

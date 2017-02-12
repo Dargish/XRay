@@ -11,25 +11,25 @@ public:
 	LightDirectional(
 		const Vector3& direction,
 		const RGBA& emission,
-		int sampleCount = 1,
+		float rayMultiplier = 0.5f,
 		float shadowSoftness = 0.0f
 	);
 
 	const Vector3& direction() const;
 	const RGBA& emission() const;
-	int sampleCount() const;
+	float rayMultiplier() const;
 	float shadowSoftness() const;
 
 	void setDirection(const Vector3& direction);
 	void setEmission(const RGBA& emission);
-	void setSampleCount(int sampleCount);
+	void setRayMultiplier(float rayMultiplier);
 	void setShadowSoftness(float shadowSoftness);
 
-	virtual RGB light(const RayTracer& rayTracer, const Vector3& position, const Vector3& normal) const override;
+	virtual RGB light(const RayTracer& rayTracer, const Vector3& position, const Vector3& normal, float rayMultiplier) const override;
 
 private:
 	Vector3 m_direction;
 	RGBA m_emission;
-	int m_sampleCount;
+	float m_rayMultiplier;
 	float m_shadowSoftness;
 };

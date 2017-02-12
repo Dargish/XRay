@@ -46,14 +46,15 @@ RGBA ShaderLambert::shade(const RayTracer& rayTracer, const Ray& ray, const Vect
 
 	RGBA reflection(0.0f, 0.0f, 0.0f, 0.0f);
 
-	RGB light = rayTracer.lightAtPoint(position, normal);
+	RGB light = rayTracer.lightAtPoint(position, normal, ray.rayMultiplier);
 	RGBA diffuse = m_diffuse * light;
 
 	// Reflection
-	if (ray.childCount > 0)
+	size_t rayCount = (size_t)(rayTracer.baseRayCount() * ray.rayMultiplier);
+	if (rayCount > 0)
 	{
-		Ray reflectRay(position, reflect, ray.childCount / 2);
-		if (ray.childCount == 1)
+		Ray reflectRay(position, reflect, ray.rayMultiplier * 0.5f);
+		if (rayCount == 1)
 		{
 			reflection = rayTracer.traceRay(reflectRay);
 		}

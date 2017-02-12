@@ -6,7 +6,7 @@
 #include <tbb/tbb.h>
 
 #include "Camera.h"
-#include "Sphere.h"
+#include "IntersectableSphere.h"
 #include "Scene.h"
 #include "Image.h"
 #include "RayTracer.h"
@@ -24,7 +24,7 @@ int main()
 {
 	auto t1 = Clock::now();
 
-	int numThreads = tbb::task_scheduler_init::default_num_threads() - 1;
+	int numThreads = tbb::task_scheduler_init::default_num_threads();
 
 	std::cout << "Rendering using " << numThreads << " cores" << std::endl;
 
@@ -34,15 +34,17 @@ int main()
 
 	Camera camera(Vector3(0.0f, 0.0f, -9.0f));
 
-	ShaderPtr shader(new ShaderLambert(RGB(1.0f, 0.5f, 1.0f), 0.25f));
+	ShaderPtr yellowShader(new ShaderLambert(RGB(0.9f, 0.9f, 0.1f), 0.25f));
+	ShaderPtr greenShader(new ShaderLambert(RGB(0.1f, 0.9f, 0.1f), 0.25f));
+	ShaderPtr blueShader(new ShaderLambert(RGB(0.1f, 0.1f, 0.9f), 0.25f));
 
 	ScenePtr scene(new Scene);
 
-	scene->addLight<LightDirectional>(Vector3(-0.5f, -0.5f, 1.0f).normalize(), RGBA(1.0f, 1.0f, 1.0f, 2.0f), 16, 0.05f);
+	scene->addLight<LightDirectional>(Vector3(-0.5f, -0.5f, 1.0f).normalize(), RGBA(1.0f, 1.0f, 1.0f, 2.0f), 0.5f, 0.05f);
 
-	scene->addIntersectable<Sphere>(Vector3(-2.0f, -1.0f, -3.0f), 1.0f)->setShader(shader);
-	scene->addIntersectable<Sphere>(Vector3(0.0f, 0.5f, 1.0f), 3.0f)->setShader(shader);
-	scene->addIntersectable<Sphere>(Vector3(2.5f, 1.0f, -5.0f), 1.0f)->setShader(shader);
+	scene->addIntersectable<IntersectableSphere>(Vector3(-2.0f, -1.0f, -3.0f), 1.0f)->setShader(yellowShader);
+	scene->addIntersectable<IntersectableSphere>(Vector3(0.0f, 0.5f, 1.0f), 3.0f)->setShader(greenShader);
+	scene->addIntersectable<IntersectableSphere>(Vector3(2.5f, 1.0f, -5.0f), 1.0f)->setShader(blueShader);
 
 	Image image(800, 600);
 

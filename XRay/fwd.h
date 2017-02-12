@@ -20,7 +20,7 @@ struct RGBA;
 class Scene;
 class Shader;
 class ShaderLambert;
-class Sphere;
+class IntersectableSphere;
 class Vector3;
 
 typedef std::shared_ptr<Camera> CameraPtr;

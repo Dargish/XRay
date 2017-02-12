@@ -11,8 +11,8 @@
 #include <tbb/parallel_for.h>
 
 
-RayTracer::RayTracer(const ScenePtr& scene_, size_t raysPerPixel_ /*= 32*/) :
-	m_scene(scene_), m_raysPerPixel(raysPerPixel_)
+RayTracer::RayTracer(const ScenePtr& scene_, size_t baseRayCount_ /*= 32*/) :
+	m_scene(scene_), m_baseRayCount(baseRayCount_)
 {
 
 }
@@ -22,14 +22,14 @@ const ScenePtr& RayTracer::scene() const
 	return m_scene;
 }
 
-size_t RayTracer::raysPerPixel() const
+size_t RayTracer::baseRayCount() const
 {
-	return m_raysPerPixel;
+	return m_baseRayCount;
 }
 
-void RayTracer::setRaysPerPixel(size_t raysPerPixel_)
+void RayTracer::setBaseRayCount(size_t baseRayCount_)
 {
-	m_raysPerPixel = raysPerPixel_;
+	m_baseRayCount = baseRayCount_;
 }
 
 
@@ -44,13 +44,19 @@ void RayTracer::traceImage(const Camera& camera, Image& image) const
 
 float RayTracer::shootRays(Ray& ray, float coneRadAngle, const Vector3& planeNormal /*= Vector3()*/) const
 {
+	size_t rayCount = (size_t)(m_baseRayCount * ray.rayMultiplier);
+	if (coneRadAngle < 0.0001f || rayCount <= 1)
+	{
+		return shootRay(ray) ? 1.0f : 0.0f;
+	}
+
 	float result = 0.0f;
 	Vector3 u, v;
 	ray.direction.orthogonalVectors(u, v);
 
 	bool reflectOffNormalPlane = planeNormal != Vector3();
 
-	tbb::parallel_for(size_t(0), ray.childCount, [&](size_t r) {
+	tbb::parallel_for(size_t(0), rayCount, [&](size_t r) {
 		Ray thisRay(ray.origin);
 		thisRay.direction = Vector3::RandomRay(ray.direction, u, v, coneRadAngle);
 		// Check against normal plane to ensure rays don't shoot under the surface of it
@@ -66,7 +72,7 @@ float RayTracer::shootRays(Ray& ray, float coneRadAngle, const Vector3& planeNor
 		}
 	});
 
-	result /= (float)ray.childCount;
+	result /= (float)rayCount;
 
 	return result;
 }
@@ -78,19 +84,19 @@ bool RayTracer::shootRay(Ray& ray) const
 
 RGBA RayTracer::traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNormal /*= Vector3()*/) const
 {
-	if (coneRadAngle < 0.0001f)
+	size_t rayCount = (size_t)(m_baseRayCount * ray.rayMultiplier);
+	if (coneRadAngle < 0.0001f || rayCount <= 1)
 	{
 		return traceRay(ray);
 	}
-
-	RGBA combined(0.0f, 0.0f, 0.0f, 0.0f);
 
 	Vector3 u, v;
 	ray.direction.orthogonalVectors(u, v);
 
 	bool reflectOffNormalPlane = planeNormal != Vector3();
 
-	tbb::parallel_for(size_t(0), ray.childCount, [&](size_t r) {
+	RGBA combined(0.0f, 0.0f, 0.0f, 0.0f);
+	tbb::parallel_for(size_t(0), rayCount, [&](size_t r) {
 		Ray thisRay(ray.origin);
 		thisRay.direction = Vector3::RandomRay(ray.direction, u, v, coneRadAngle);
 		// Check against normal plane to ensure rays don't shoot under the surface of it
@@ -100,7 +106,7 @@ RGBA RayTracer::traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNorm
 			// Just search for another random ray and hope it's above the surface
 			thisRay.direction = Vector3::RandomRay(ray.direction, u, v, coneRadAngle);
 		}
-		thisRay.childCount = ray.childCount;
+		thisRay.rayMultiplier = ray.rayMultiplier * 0.5f;
 		Scene::RayIntersectionResult intersectionResult;
 		if (m_scene->shootRay(thisRay, &intersectionResult))
 		{
@@ -114,7 +120,7 @@ RGBA RayTracer::traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNorm
 			}
 		}
 	});
-	combined /= (float)ray.childCount;
+	combined /= (float)rayCount;
 	return combined;
 }
 
@@ -136,13 +142,13 @@ RGBA RayTracer::traceRay(Ray& ray) const
 	return result;
 }
 
-RGB RayTracer::lightAtPoint(const Vector3& position, const Vector3& normal) const
+RGB RayTracer::lightAtPoint(const Vector3& position, const Vector3& normal, float rayMultiplier) const
 {
 	RGB result;
 	Vector3 adjustedPosition = position + normal * FLT_EPSILON;
 	for (const LightPtr& light : m_scene->lights())
 	{
-		result += light->light(*this, adjustedPosition, normal);
+		result += light->light(*this, adjustedPosition, normal, rayMultiplier);
 	}
 	return result;
 }
@@ -158,15 +164,15 @@ void RayTracer::tracePixel(const Camera& camera, Image& image, size_t w, size_t 
 
 	RGBA result(0.0f, 0.0f, 0.0f, 0.0f);
 
-	tbb::parallel_for(size_t(0), m_raysPerPixel, [&](size_t r) {
+	tbb::parallel_for(size_t(0), m_baseRayCount, [&](size_t r) {
 		float randX = (float(std::rand()) / fRandMax) - 0.5f;
 		float randY = (float(std::rand()) / fRandMax) - 0.5f;
 		Ray ray = camera.ray(x + randX * dx, y + randY * dy);
-		ray.childCount = m_raysPerPixel / 2;
+		ray.rayMultiplier = 0.5f;
 		result += traceRay(ray);
 	});
 
-	result /= (float)m_raysPerPixel;
+	result /= (float)m_baseRayCount;
 
 	ImageLock lock(image);
 	image.pixel(w, h) = result;
