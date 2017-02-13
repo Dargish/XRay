@@ -15,7 +15,7 @@
 #include "LightDirectional.h"
 #include "ImageWriterBMP.h"
 #include "ImageWriterTGA.h"
-#include "PostProcessToneMap.h"
+#include "PostProcessGammaCorrect.h"
 
 #include <chrono>
 typedef std::chrono::high_resolution_clock Clock;
@@ -35,10 +35,10 @@ int main()
 
 	Camera camera(Vector3(0.0f, 2.5f, -12.0f) , Vector3(0.0f, -0.05f, 0.9f));
 
-	ShaderPtr yellowShader(new ShaderLambert(RGB(0.9f, 0.9f, 0.1f), 0.25f));
-	ShaderPtr greenShader(new ShaderLambert(RGB(0.1f, 0.9f, 0.1f), 0.25f));
-	ShaderPtr blueShader(new ShaderLambert(RGB(0.1f, 0.1f, 0.9f), 0.25f));
-	ShaderPtr mirrorShader(new ShaderLambert(RGB(1.0f, 0.0f, 0.0f), 0.01f));
+	ShaderPtr yellowShader(new ShaderLambert(RGB(0.9f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
+	ShaderPtr greenShader(new ShaderLambert(RGB(0.2f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
+	ShaderPtr blueShader(new ShaderLambert(RGB(0.2f, 0.2f, 0.9f), 0.25f, RGB(1.46f)));
+	ShaderPtr mirrorShader(new ShaderLambert(RGB(0.01f, 0.01f, 0.01f), 0.01f, RGB(1.46f)));
 
 	ScenePtr scene(new Scene);
 
@@ -53,17 +53,16 @@ int main()
 
 	camera.setAspectRatio(image.aspectRatio());
 
-	RayTracer rayTracer(scene, 32);
+	RayTracer rayTracer(scene, 128);
 
 	rayTracer.traceImage(camera, image);
 
-	//PostProcessStack postProcessStack;
-	//PostProcessToneMapPtr toneMap = postProcessStack.push<PostProcessToneMap>();
+	PostProcessStack postProcessStack;
+	postProcessStack.push<PostProcessGammaCorrect>();
+	postProcessStack.process(image);
 
-	//postProcessStack.process(image);
-
-	//std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render";
-	std::string renderpath = "E:\\GitHub\\XRay\\render";
+	std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render";
+	//std::string renderpath = "E:\\GitHub\\XRay\\render";
 
 	ImageWriterBMP writerBMP;
 	writerBMP.writeImage(image, renderpath + ".bmp");

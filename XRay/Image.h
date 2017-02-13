@@ -10,7 +10,6 @@
 class Image
 {
 public:
-
 	typedef std::vector<RGBA> Pixels;
 
 	Image(size_t width = 0, size_t height = 0);

@@ -27,8 +27,6 @@ public:
 	RGBA traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNormal = Vector3()) const;
 	RGBA traceRay(Ray& ray) const;
 
-	RGB lightAtPoint(const Vector3& position, const Vector3& normal, float rayMultiplier) const;
-
 private:
 	void tracePixel(const Camera& camera, Image& image, size_t w, size_t h) const;
 

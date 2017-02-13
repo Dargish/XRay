@@ -3,13 +3,7 @@
 #include "fwd.h"
 #include "Vector3.h"
 
-#include <vector>
 #include <limits>
-#include <memory>
-
-
-typedef std::vector<IntersectablePtr> IntersectablePtrs;
-typedef std::vector<LightPtr> LightPtrs;
 
 
 class Scene

@@ -1,6 +1,6 @@
 Todo:
 
-Correct BRDFs
+Fix Weird Speckles
 
 Ambient Light
 

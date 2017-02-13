@@ -57,7 +57,17 @@ void LightDirectional::setShadowSoftness(float shadowSoftness_)
 	m_shadowSoftness = shadowSoftness_;
 }
 
-RGB LightDirectional::light(const RayTracer& rayTracer, const Vector3& position, const Vector3& normal, float rayMultiplier) const
+bool LightDirectional::hasDirection() const
+{
+	return true;
+}
+
+Vector3 LightDirectional::direction(const Vector3& position) const
+{
+	return -m_direction;
+}
+
+RGB LightDirectional::light(const RayTracer& rayTracer, const Vector3& position, float rayMultiplier) const
 {
 	RGB light;
 	float shadowMult = 1.0f;
@@ -65,7 +75,7 @@ RGB LightDirectional::light(const RayTracer& rayTracer, const Vector3& position,
 	if (rayMultiplier > 0.0f && m_shadowSoftness > FLT_EPSILON)
 	{
 		float coneRadAngle = m_shadowSoftness * PI_F * 0.5f;
-		shadowMult = 1.0f - rayTracer.shootRays(Ray(position, -m_direction, rayMultiplier), coneRadAngle, normal);
+		shadowMult = 1.0f - rayTracer.shootRays(Ray(position, -m_direction, rayMultiplier), coneRadAngle);
 	}
 	else
 	{
@@ -74,8 +84,7 @@ RGB LightDirectional::light(const RayTracer& rayTracer, const Vector3& position,
 			return light;
 		}
 	}
-	float NoL = saturate(normal.dot(-m_direction));
-	float lightMult = m_emission.a * NoL * shadowMult;
+	float lightMult = m_emission.a * shadowMult;
 	light = RGB(
 		m_emission.r * lightMult,
 		m_emission.g * lightMult,

@@ -2,9 +2,6 @@
 
 #include "fwd.h"
 
-#include <memory>
-#include <vector>
-
 
 class PostProcess
 {
@@ -16,7 +13,7 @@ public:
 	virtual void process(Image& image) const = 0;
 };
 
-typedef std::vector<PostProcessPtr> PostProcessPtrs;
+
 
 class PostProcessStack
 {

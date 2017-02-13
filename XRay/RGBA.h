@@ -7,7 +7,9 @@ struct RGBA
 {
 	float r, g, b, a;
 
-	RGBA(float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f);
+	RGBA();
+	RGBA(float v);
+	RGBA(float r, float g, float b, float a = 1.0f);
 
 	RGBA(const RGB& rgb, float a = 1.0f);
 

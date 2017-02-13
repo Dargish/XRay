@@ -3,7 +3,7 @@
 #include "PostProcess.h"
 
 
-class PostProcessToneMap : public PostProcess
+class PostProcessGammaCorrect : public PostProcess
 {
 public:
 	virtual void process(Image& image) const override;

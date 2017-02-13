@@ -169,6 +169,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="IntersectablePlane.cpp" />
     <ClCompile Include="LightDirectional.cpp" />
+    <ClCompile Include="PostProcessGammaCorrect.cpp" />
     <ClCompile Include="RGB.cpp" />
     <ClCompile Include="RGBA.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightDirectional.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="PostProcessGammaCorrect.h" />
     <ClInclude Include="RGB.h" />
     <ClInclude Include="RGBA.h" />
     <ClInclude Include="Image.h" />

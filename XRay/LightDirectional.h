@@ -25,7 +25,11 @@ public:
 	void setRayMultiplier(float rayMultiplier);
 	void setShadowSoftness(float shadowSoftness);
 
-	virtual RGB light(const RayTracer& rayTracer, const Vector3& position, const Vector3& normal, float rayMultiplier) const override;
+	virtual bool hasDirection() const override;
+
+	virtual Vector3 direction(const Vector3& position) const override;
+
+	virtual RGB light(const RayTracer& rayTracer, const Vector3& position, float rayMultiplier) const override;
 
 private:
 	Vector3 m_direction;

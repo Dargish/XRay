@@ -112,7 +112,7 @@ RGBA RayTracer::traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNorm
 		{
 			if (intersectionResult.intersectable->shader())
 			{
-				combined += intersectionResult.intersectable->shader()->shade(*this, thisRay, intersectionResult.normal);
+				combined += intersectionResult.intersectable->shader()->shade(*this, thisRay, intersectionResult.normal, m_scene->lights());
 			}
 			else
 			{
@@ -132,23 +132,12 @@ RGBA RayTracer::traceRay(Ray& ray) const
 	{
 		if (intersectionResult.intersectable->shader())
 		{
-			result = intersectionResult.intersectable->shader()->shade(*this, ray, intersectionResult.normal);
+			result = intersectionResult.intersectable->shader()->shade(*this, ray, intersectionResult.normal, m_scene->lights());
 		}
 		else
 		{
 			result.a = 1.0;
 		}
-	}
-	return result;
-}
-
-RGB RayTracer::lightAtPoint(const Vector3& position, const Vector3& normal, float rayMultiplier) const
-{
-	RGB result;
-	Vector3 adjustedPosition = position + normal * FLT_EPSILON;
-	for (const LightPtr& light : m_scene->lights())
-	{
-		result += light->light(*this, adjustedPosition, normal, rayMultiplier);
 	}
 	return result;
 }

@@ -4,7 +4,19 @@
 #include <algorithm>
 
 
-RGBA::RGBA(float r_ /*= 0.0f*/, float g_ /*= 0.0f*/, float b_ /*= 0.0f*/, float a_ /*= 1.0f*/) :
+RGBA::RGBA() :
+	r(0.0f), g(0.0f), b(0.0f), a(1.0f)
+{
+
+}
+
+RGBA::RGBA(float v) :
+	r(v), g(v), b(v), a(1.0f)
+{
+
+}
+
+RGBA::RGBA(float r_, float g_, float b_, float a_ /*= 1.0f*/) :
 	r(r_), g(g_), b(b_), a(a_)
 {
 

@@ -6,7 +6,9 @@ struct RGB
 {
 	float r, g, b;
 
-	RGB(float r = 0.0f, float g = 0.0f, float b = 0.0f);
+	RGB();
+	RGB(float v);
+	RGB(float r, float g, float b);
 
 	RGB& operator+=(const RGB& other);
 	RGB operator+(const RGB& other) const;
@@ -20,6 +22,8 @@ struct RGB
 	RGB operator*(float value) const;
 	RGB& operator/=(float value);
 	RGB operator/(float value) const;
+
+	RGB pow(float power) const;
 
 	RGB& saturate();
 	RGB saturated() const;

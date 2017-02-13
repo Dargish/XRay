@@ -3,7 +3,19 @@
 #include <algorithm>
 
 
-RGB::RGB(float r_ /*= 0.0f*/, float g_ /*= 0.0f*/, float b_ /*= 0.0f*/) :
+RGB::RGB() :
+	r(0.0f), g(0.0f), b(0.0f)
+{
+
+}
+
+RGB::RGB(float v) :
+	r(v), g(v), b(v)
+{
+
+}
+
+RGB::RGB(float r_, float g_, float b_) :
 	r(r_), g(g_), b(b_)
 {
 
@@ -85,6 +97,15 @@ RGB& RGB::operator/=(float value)
 RGB RGB::operator/(float value) const
 {
 	return RGB(r / value, g / value, b / value);
+}
+
+RGB RGB::pow(float power) const
+{
+	return RGB(
+		std::pow(r, power),
+		std::pow(g, power),
+		std::pow(b, power)
+	);
 }
 
 RGB& RGB::saturate()
