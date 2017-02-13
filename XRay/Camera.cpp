@@ -11,7 +11,7 @@ Camera::Camera(
 	float aspectRatio_ /*= 1.0f*/
 ) :
 	m_position(position_),
-	m_direction(direction_),
+	m_direction(direction_.normalized()),
 	m_up(up_),
 	m_focalLength(focalLength_),
 	m_fStop(fStop_),

@@ -1,9 +1,11 @@
 Todo:
 
-Plane Intersectable
+Correct BRDFs
 
 Ambient Light
+
 Point Light
+
 Spot Light
 
-Correct BRDFs
+HDRI Light

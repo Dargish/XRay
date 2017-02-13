@@ -10,7 +10,7 @@ LightDirectional::LightDirectional(
 	const RGBA& emission_,
 	float rayMultiplier_ /*= 1*/,
 	float shadowSoftness_ /*= 0.0f*/) :
-	m_direction(direction_),
+	m_direction(direction_.normalized()),
 	m_emission(emission_),
 	m_rayMultiplier(rayMultiplier_),
 	m_shadowSoftness(shadowSoftness_)

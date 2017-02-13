@@ -7,7 +7,7 @@ Ray::Ray(
 	float rayMultiplier_ /*= 0*/,
 	float distance_ /*= std::numeric_limits<float>::max()*/
 ) :
-	origin(origin_), direction(direction_), rayMultiplier(rayMultiplier_), distance(distance_)
+	origin(origin_), direction(direction_.normalized()), rayMultiplier(rayMultiplier_), distance(distance_)
 {
 
 }

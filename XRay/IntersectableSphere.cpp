@@ -5,7 +5,7 @@
 
 
 IntersectableSphere::IntersectableSphere(
-	Vector3 center_ /*= Vector3(0.0f, 0.0f, 0.0f)*/,
+	const Vector3& center_ /*= Vector3(0.0f, 0.0f, 0.0f)*/,
 	float radius_ /*= 1.0f*/
 ) :
 	center(center_), radius(radius_)

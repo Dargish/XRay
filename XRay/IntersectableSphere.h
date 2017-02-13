@@ -11,7 +11,7 @@ public:
 	float radius;
 
 	IntersectableSphere(
-		Vector3 center = Vector3(0.0f, 0.0f, 0.0f),
+		const Vector3& center = Vector3(0.0f, 0.0f, 0.0f),
 		float radius = 1.0f
 	);
 
