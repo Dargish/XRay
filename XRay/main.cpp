@@ -11,21 +11,29 @@
 #include "Scene.h"
 #include "Image.h"
 #include "RayTracer.h"
-#include "ShaderLambert.h"
+#include "ShaderBRDF.h"
 #include "LightDirectional.h"
 #include "ImageWriterBMP.h"
 #include "ImageWriterTGA.h"
 #include "PostProcessGammaCorrect.h"
 
+#include "DiffuseOrenNayer.h"
+#include "FresnelSchlick.h"
+#include "GeometricNeumann.h"
+#include "DistributionGGX.h"
+
 #include <chrono>
 typedef std::chrono::high_resolution_clock Clock;
+
+
+typedef TypedBRDFSet<DiffuseOrenNayer, FresnelSchlick, GeometricNeumann, DistributionGGX> StandardBRDF;
 
 
 int main()
 {
 	auto t1 = Clock::now();
 
-	int numThreads = tbb::task_scheduler_init::default_num_threads();
+	int numThreads = tbb::task_scheduler_init::default_num_threads() - 1;
 
 	std::cout << "Rendering using " << numThreads << " cores" << std::endl;
 
@@ -35,10 +43,12 @@ int main()
 
 	Camera camera(Vector3(0.0f, 2.5f, -12.0f) , Vector3(0.0f, -0.05f, 0.9f));
 
-	ShaderPtr yellowShader(new ShaderLambert(RGB(0.9f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
-	ShaderPtr greenShader(new ShaderLambert(RGB(0.2f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
-	ShaderPtr blueShader(new ShaderLambert(RGB(0.2f, 0.2f, 0.9f), 0.25f, RGB(1.46f)));
-	ShaderPtr mirrorShader(new ShaderLambert(RGB(0.01f, 0.01f, 0.01f), 0.01f, RGB(1.46f)));
+	BRDFSetPtr brdfSet(new StandardBRDF);
+
+	ShaderPtr yellowShader(new ShaderBRDF(brdfSet, RGB(0.9f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
+	ShaderPtr greenShader(new ShaderBRDF(brdfSet, RGB(0.2f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
+	ShaderPtr blueShader(new ShaderBRDF(brdfSet, RGB(0.2f, 0.2f, 0.9f), 0.25f, RGB(1.46f)));
+	ShaderPtr mirrorShader(new ShaderBRDF(brdfSet, RGB(0.01f, 0.01f, 0.01f), 0.01f, RGB(1.46f)));
 
 	ScenePtr scene(new Scene);
 
@@ -53,7 +63,7 @@ int main()
 
 	camera.setAspectRatio(image.aspectRatio());
 
-	RayTracer rayTracer(scene, 128);
+	RayTracer rayTracer(scene, 16);
 
 	rayTracer.traceImage(camera, image);
 
@@ -61,8 +71,8 @@ int main()
 	postProcessStack.push<PostProcessGammaCorrect>();
 	postProcessStack.process(image);
 
-	std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render";
-	//std::string renderpath = "E:\\GitHub\\XRay\\render";
+	//std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render";
+	std::string renderpath = "E:\\GitHub\\XRay\\render";
 
 	ImageWriterBMP writerBMP;
 	writerBMP.writeImage(image, renderpath + ".bmp");

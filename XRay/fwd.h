@@ -21,7 +21,7 @@ struct RGB;
 struct RGBA;
 class Scene;
 class Shader;
-class ShaderLambert;
+class ShaderBRDF;
 class IntersectableSphere;
 class Vector3;
 

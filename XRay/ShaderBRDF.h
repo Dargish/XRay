@@ -2,12 +2,13 @@
 
 #include "Shader.h"
 #include "RGB.h"
+#include "BRDF.h"
 
-class ShaderLambert : public Shader
+class ShaderBRDF : public Shader
 {
 public:
-	ShaderLambert();
-	ShaderLambert(const RGB& diffuse, float roughness, const RGB& indexOfRefraction);
+	ShaderBRDF(const BRDFSetPtr& brdfSet);
+	ShaderBRDF(const BRDFSetPtr& brdfSet, const RGB& diffuse, float roughness, const RGB& indexOfRefraction);
 
 	const RGB& diffuse() const;
 	void setDiffuse(const RGB& diffuse);
@@ -21,14 +22,11 @@ public:
 	RGBA shade(const RayTracer& rayTracer, const Ray& ray, const Vector3& normal, const LightPtrs& lights) const override;
 
 private:
-	float diffuseOrenNayer(float VoL, float NoL, float NoV) const;
-	RGB schlickFresnel(float LoH) const;
-	float geometricNeumann(float NoL, float NoV) const;
-	float dGGX(float NoH) const;
-
 	RGB m_diffuse;
 	float m_roughness;
 	RGB m_indexOfRefraction;
 	RGB m_f0;
+
+	BRDFSetPtr m_brdfSet;
 };
 
