@@ -33,7 +33,7 @@ int main()
 {
 	auto t1 = Clock::now();
 
-	int numThreads = tbb::task_scheduler_init::default_num_threads() - 1;
+	int numThreads = tbb::task_scheduler_init::default_num_threads();
 
 	std::cout << "Rendering using " << numThreads << " cores" << std::endl;
 
@@ -45,10 +45,11 @@ int main()
 
 	BRDFSetPtr brdfSet(new StandardBRDF);
 
-	ShaderPtr yellowShader(new ShaderBRDF(brdfSet, RGB(0.9f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
-	ShaderPtr greenShader(new ShaderBRDF(brdfSet, RGB(0.2f, 0.9f, 0.2f), 0.25f, RGB(1.46f)));
-	ShaderPtr blueShader(new ShaderBRDF(brdfSet, RGB(0.2f, 0.2f, 0.9f), 0.25f, RGB(1.46f)));
-	ShaderPtr mirrorShader(new ShaderBRDF(brdfSet, RGB(0.01f, 0.01f, 0.01f), 0.01f, RGB(1.46f)));
+	ShaderPtr yellowShader(new ShaderBRDF(brdfSet, RGB(0.9f, 0.9f, 0.2f), 0.25f, RGB(0.04f)));
+	ShaderPtr greenShader(new ShaderBRDF(brdfSet, RGB(0.2f, 0.9f, 0.2f), 0.25f, RGB(0.04f)));
+	ShaderPtr blueShader(new ShaderBRDF(brdfSet, RGB(0.2f, 0.2f, 0.9f), 0.25f, RGB(0.04f)));
+	ShaderPtr planeShader(new ShaderBRDF(brdfSet, RGB(0.5f, 0.5f, 0.5f), 0.01f, RGB(0.04f)));
+	ShaderPtr goldShader(new ShaderBRDF(brdfSet, RGB(0.0f, 0.0f, 0.0f), 0.01f, RGB(1.0f, 0.71f, 0.29f)));
 
 	ScenePtr scene(new Scene);
 
@@ -56,8 +57,8 @@ int main()
 
 	scene->addIntersectable<IntersectableSphere>(Vector3(-2.0f, 0.5f, -3.0f), 1.0f)->setShader(yellowShader);
 	scene->addIntersectable<IntersectableSphere>(Vector3(0.0f, 3.0f, 1.0f), 3.0f)->setShader(greenShader);
-	scene->addIntersectable<IntersectableSphere>(Vector3(2.5f, 2.5f, -5.0f), 1.0f)->setShader(blueShader);
-	scene->addIntersectable<IntersectablePlane>(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 1.0f, 0.0f))->setShader(mirrorShader);
+	scene->addIntersectable<IntersectableSphere>(Vector3(2.5f, 2.5f, -5.0f), 1.0f)->setShader(goldShader);
+	scene->addIntersectable<IntersectablePlane>(Vector3(0.0f, 0.0f, 0.0f), Vector3(0.0f, 1.0f, 0.0f))->setShader(planeShader);
 
 	Image image(800, 600);
 

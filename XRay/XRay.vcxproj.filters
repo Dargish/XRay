@@ -13,165 +13,210 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Intersectables">
+      <UniqueIdentifier>{8aeff41e-6df9-43d4-88a9-2deb98795c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ImageWriters">
+      <UniqueIdentifier>{089c747c-1981-42d9-8220-4e95734d39c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PostProcesses">
+      <UniqueIdentifier>{55361f64-c2b1-4a3e-938c-fd7814523828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shaders">
+      <UniqueIdentifier>{7ca4521a-9136-4b19-9250-f35e1c4f63db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lights">
+      <UniqueIdentifier>{c53383b5-0d6b-4852-b99a-a1f9cc7e8b0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Types">
+      <UniqueIdentifier>{a7893d4d-6be6-4ffc-a834-4fd2548c5c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{e429a17e-310c-4621-96c3-9224922f1453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BRDFs">
+      <UniqueIdentifier>{a4c1894a-be36-487b-b5d4-a616bca77536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BRDFs">
+      <UniqueIdentifier>{ea005eca-0f99-48a1-879d-e59078e758c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ImageWriters">
+      <UniqueIdentifier>{42d43c55-cbdf-4005-9cf5-8ebd3146c41e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Intersectables">
+      <UniqueIdentifier>{2815fdb3-29bc-41dc-b3c7-6a86f45f301c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lights">
+      <UniqueIdentifier>{f030f68d-97e0-4226-a6b4-6882a35ebaae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Types">
+      <UniqueIdentifier>{73bf9450-afbd-4ddf-a2e1-55e77f4b2ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PostProcesses">
+      <UniqueIdentifier>{560af47a-439e-47bf-b347-733d3c3c4cb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{e0953198-b37f-41f9-a656-5147cd5e1c4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Intersectable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RayTracer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImageWriterTGA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageWriterBMP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PostProcessToneMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PostProcess.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RGBA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RGB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LightDirectional.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IntersectableSphere.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IntersectablePlane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PostProcessGammaCorrect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BRDF.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FresnelSchlick.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\BRDFs</Filter>
     </ClCompile>
     <ClCompile Include="DiffuseOrenNayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometricNeumann.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\BRDFs</Filter>
     </ClCompile>
     <ClCompile Include="DistributionGGX.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\BRDFs</Filter>
+    </ClCompile>
+    <ClCompile Include="FresnelSchlick.cpp">
+      <Filter>Source Files\BRDFs</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometricNeumann.cpp">
+      <Filter>Source Files\BRDFs</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageWriterBMP.cpp">
+      <Filter>Source Files\ImageWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageWriterTGA.cpp">
+      <Filter>Source Files\ImageWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Intersectable.cpp">
+      <Filter>Source Files\Intersectables</Filter>
+    </ClCompile>
+    <ClCompile Include="IntersectablePlane.cpp">
+      <Filter>Source Files\Intersectables</Filter>
+    </ClCompile>
+    <ClCompile Include="IntersectableSphere.cpp">
+      <Filter>Source Files\Intersectables</Filter>
+    </ClCompile>
+    <ClCompile Include="LightDirectional.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcess.cpp">
+      <Filter>Source Files\PostProcesses</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessGammaCorrect.cpp">
+      <Filter>Source Files\PostProcesses</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessToneMap.cpp">
+      <Filter>Source Files\PostProcesses</Filter>
     </ClCompile>
     <ClCompile Include="ShaderBRDF.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBA.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="RGB.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Source Files\Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Intersectable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RayTracer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImageWriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageWriterTGA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageWriterBMP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PostProcess.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PostProcessToneMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RGBA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RGB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="fwd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LightDirectional.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IntersectableSphere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IntersectablePlane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PostProcessGammaCorrect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BRDF.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FresnelSchlick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DistributionGGX.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometricNeumann.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\BRDFs</Filter>
     </ClInclude>
     <ClInclude Include="DiffuseOrenNayer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\BRDFs</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometricNeumann.h">
+      <Filter>Header Files\BRDFs</Filter>
+    </ClInclude>
+    <ClInclude Include="FresnelSchlick.h">
+      <Filter>Header Files\BRDFs</Filter>
+    </ClInclude>
+    <ClInclude Include="DistributionGGX.h">
+      <Filter>Header Files\BRDFs</Filter>
+    </ClInclude>
+    <ClInclude Include="Intersectable.h">
+      <Filter>Header Files\Intersectables</Filter>
+    </ClInclude>
+    <ClInclude Include="IntersectablePlane.h">
+      <Filter>Header Files\Intersectables</Filter>
+    </ClInclude>
+    <ClInclude Include="IntersectableSphere.h">
+      <Filter>Header Files\Intersectables</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageWriter.h">
+      <Filter>Header Files\ImageWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageWriterBMP.h">
+      <Filter>Header Files\ImageWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageWriterTGA.h">
+      <Filter>Header Files\ImageWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcess.h">
+      <Filter>Header Files\PostProcesses</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessGammaCorrect.h">
+      <Filter>Header Files\PostProcesses</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessToneMap.h">
+      <Filter>Header Files\PostProcesses</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
     <ClInclude Include="ShaderBRDF.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="LightDirectional.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="RGB.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBA.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

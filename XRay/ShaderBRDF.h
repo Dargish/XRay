@@ -8,7 +8,7 @@ class ShaderBRDF : public Shader
 {
 public:
 	ShaderBRDF(const BRDFSetPtr& brdfSet);
-	ShaderBRDF(const BRDFSetPtr& brdfSet, const RGB& diffuse, float roughness, const RGB& indexOfRefraction);
+	ShaderBRDF(const BRDFSetPtr& brdfSet, const RGB& diffuse, float roughness, const RGB& f0);
 
 	const RGB& diffuse() const;
 	void setDiffuse(const RGB& diffuse);
@@ -16,8 +16,8 @@ public:
 	float roughness() const;
 	void setRoughness(float roughness);
 
-	const RGB& indexOfRefraction() const;
-	void setIndexOfRefraction(const RGB& indexOfRefraction);
+	const RGB& f0() const;
+	void setF0(const RGB& f0);
 
 	RGBA shade(const RayTracer& rayTracer, const Ray& ray, const Vector3& normal, const LightPtrs& lights) const override;
 
