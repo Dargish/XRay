@@ -104,13 +104,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\tbb2017_3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\tbb2017_3\include;$(SolutionDir)external\openexr-2.2\include\OpenEXR;$(SolutionDir)external\ilmbase-2.2\include\OpenEXR</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)external\tbb2017_3\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>tbb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\tbb2017_3\lib;$(SolutionDir)external\openexr-2.2\lib;$(SolutionDir)external\ilmbase-2.2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>IlmImf-2_2.lib;Half.lib;tbb.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)external\tbb2017_3\bin\tbb.dll $(SolutionDir)$(Platform)\$(Configuration)\</Command>
@@ -148,15 +148,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)external\tbb2017_3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)external\tbb2017_3\include;$(SolutionDir)external\openexr-2.2\include\OpenEXR;$(SolutionDir)external\ilmbase-2.2\include\OpenEXR</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)external\tbb2017_3\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>tbb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)external\tbb2017_3\lib;$(SolutionDir)external\openexr-2.2\lib;$(SolutionDir)external\ilmbase-2.2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>IlmImf-2_2.lib;Half.lib;tbb.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)external\tbb2017_3\bin\tbb.dll $(SolutionDir)$(Platform)\$(Configuration)\</Command>
@@ -172,6 +172,7 @@
     <ClCompile Include="DistributionGGX.cpp" />
     <ClCompile Include="FresnelSchlick.cpp" />
     <ClCompile Include="GeometricNeumann.cpp" />
+    <ClCompile Include="ImageWriterEXR.cpp" />
     <ClCompile Include="IntersectablePlane.cpp" />
     <ClCompile Include="LightDirectional.cpp" />
     <ClCompile Include="PostProcessGammaCorrect.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="FresnelSchlick.h" />
     <ClInclude Include="fwd.h" />
     <ClInclude Include="GeometricNeumann.h" />
+    <ClInclude Include="ImageWriterEXR.h" />
     <ClInclude Include="IntersectablePlane.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightDirectional.h" />

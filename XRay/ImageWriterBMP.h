@@ -1,7 +1,7 @@
 #pragma once
 #include "ImageWriter.h"
 
-#include <iostream>
+#include <iosfwd>
 
 
 class ImageWriterBMP : public ImageWriter

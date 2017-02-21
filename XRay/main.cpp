@@ -15,6 +15,7 @@
 #include "LightDirectional.h"
 #include "ImageWriterBMP.h"
 #include "ImageWriterTGA.h"
+#include "ImageWriterEXR.h"
 #include "PostProcessGammaCorrect.h"
 
 #include "DiffuseOrenNayer.h"
@@ -81,8 +82,12 @@ int main()
 	ImageWriterTGA writerTGA;
 	writerTGA.writeImage(image, renderpath + ".tga");
 
+	ImageWriterEXR writerEXR;
+	writerEXR.writeImage(image, renderpath + ".exr");
+
 	std::cout << "Wrote render to " << renderpath << ".bmp" << std::endl;
 	std::cout << "Wrote render to " << renderpath << ".tga" << std::endl;
+	std::cout << "Wrote render to " << renderpath << ".exr" << std::endl;
 
 	auto t2 = Clock::now();
 	std::cout << "Render time: "

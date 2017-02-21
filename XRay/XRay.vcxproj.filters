@@ -16,9 +16,6 @@
     <Filter Include="Header Files\Intersectables">
       <UniqueIdentifier>{8aeff41e-6df9-43d4-88a9-2deb98795c99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\ImageWriters">
-      <UniqueIdentifier>{089c747c-1981-42d9-8220-4e95734d39c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\PostProcesses">
       <UniqueIdentifier>{55361f64-c2b1-4a3e-938c-fd7814523828}</UniqueIdentifier>
     </Filter>
@@ -40,9 +37,6 @@
     <Filter Include="Header Files\BRDFs">
       <UniqueIdentifier>{ea005eca-0f99-48a1-879d-e59078e758c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ImageWriters">
-      <UniqueIdentifier>{42d43c55-cbdf-4005-9cf5-8ebd3146c41e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Intersectables">
       <UniqueIdentifier>{2815fdb3-29bc-41dc-b3c7-6a86f45f301c}</UniqueIdentifier>
     </Filter>
@@ -57,6 +51,12 @@
     </Filter>
     <Filter Include="Source Files\Shaders">
       <UniqueIdentifier>{e0953198-b37f-41f9-a656-5147cd5e1c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ImageIO">
+      <UniqueIdentifier>{089c747c-1981-42d9-8220-4e95734d39c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ImageIO">
+      <UniqueIdentifier>{42d43c55-cbdf-4005-9cf5-8ebd3146c41e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,10 +85,10 @@
       <Filter>Source Files\BRDFs</Filter>
     </ClCompile>
     <ClCompile Include="ImageWriterBMP.cpp">
-      <Filter>Source Files\ImageWriters</Filter>
+      <Filter>Source Files\ImageIO</Filter>
     </ClCompile>
     <ClCompile Include="ImageWriterTGA.cpp">
-      <Filter>Source Files\ImageWriters</Filter>
+      <Filter>Source Files\ImageIO</Filter>
     </ClCompile>
     <ClCompile Include="Image.cpp">
       <Filter>Source Files\Types</Filter>
@@ -132,6 +132,9 @@
     <ClCompile Include="Ray.cpp">
       <Filter>Source Files\Types</Filter>
     </ClCompile>
+    <ClCompile Include="ImageWriterEXR.cpp">
+      <Filter>Source Files\ImageIO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -168,13 +171,13 @@
       <Filter>Header Files\Intersectables</Filter>
     </ClInclude>
     <ClInclude Include="ImageWriter.h">
-      <Filter>Header Files\ImageWriters</Filter>
+      <Filter>Header Files\ImageIO</Filter>
     </ClInclude>
     <ClInclude Include="ImageWriterBMP.h">
-      <Filter>Header Files\ImageWriters</Filter>
+      <Filter>Header Files\ImageIO</Filter>
     </ClInclude>
     <ClInclude Include="ImageWriterTGA.h">
-      <Filter>Header Files\ImageWriters</Filter>
+      <Filter>Header Files\ImageIO</Filter>
     </ClInclude>
     <ClInclude Include="PostProcess.h">
       <Filter>Header Files\PostProcesses</Filter>
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageWriterEXR.h">
+      <Filter>Header Files\ImageIO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
