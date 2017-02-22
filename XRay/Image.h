@@ -20,6 +20,8 @@ public:
 	size_t width() const;
 	size_t height() const;
 
+	void resize(size_t width, size_t height);
+
 	float aspectRatio() const;
 
 	float x(size_t w) const;

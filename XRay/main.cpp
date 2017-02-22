@@ -32,6 +32,27 @@ typedef TypedBRDFSet<DiffuseOrenNayer, FresnelSchlick, GeometricNeumann, Distrib
 
 int main()
 {
+
+	HMODULE hModule = GetModuleHandleW(NULL);
+	WCHAR exePath[MAX_PATH];
+	GetModuleFileNameW(hModule, exePath, MAX_PATH);
+	std::wstring directory(exePath);
+
+	size_t lastSlash = directory.find_last_of('\\');
+
+	if (lastSlash != std::wstring::npos)
+	{
+		directory = directory.substr(0, lastSlash + 1);
+	}
+
+	std::wstring renderDirectory = directory + L"renders";
+
+	if (!CreateDirectory(renderDirectory.c_str(), NULL) && ERROR_ALREADY_EXISTS != GetLastError())
+	{
+		std::wcerr << L"Failed to create render directory: " + renderDirectory << std::endl;
+		return 1;
+	}
+
 	auto t1 = Clock::now();
 
 	int numThreads = tbb::task_scheduler_init::default_num_threads();
@@ -73,21 +94,20 @@ int main()
 	postProcessStack.push<PostProcessGammaCorrect>();
 	postProcessStack.process(image);
 
-	//std::string renderpath = "C:\\Users\\sc\\Documents\\GitHub\\XRay\\render";
-	std::string renderpath = "E:\\GitHub\\XRay\\render";
+	std::wstring renderPath = renderDirectory + L"render";
 
 	ImageWriterBMP writerBMP;
-	writerBMP.writeImage(image, renderpath + ".bmp");
+	writerBMP.writeImage(image, renderPath + L".bmp");
 
 	ImageWriterTGA writerTGA;
-	writerTGA.writeImage(image, renderpath + ".tga");
+	writerTGA.writeImage(image, renderPath + L".tga");
 
 	ImageWriterEXR writerEXR;
-	writerEXR.writeImage(image, renderpath + ".exr");
+	writerEXR.writeImage(image, renderPath + L".exr");
 
-	std::cout << "Wrote render to " << renderpath << ".bmp" << std::endl;
-	std::cout << "Wrote render to " << renderpath << ".tga" << std::endl;
-	std::cout << "Wrote render to " << renderpath << ".exr" << std::endl;
+	std::wcout << "Wrote render to " << renderPath << ".bmp" << std::endl;
+	std::wcout << "Wrote render to " << renderPath << ".tga" << std::endl;
+	std::wcout << "Wrote render to " << renderPath << ".exr" << std::endl;
 
 	auto t2 = Clock::now();
 	std::cout << "Render time: "

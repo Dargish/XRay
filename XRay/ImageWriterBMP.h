@@ -3,6 +3,7 @@
 
 #include <iosfwd>
 
+typedef unsigned char ubyte;
 
 class ImageWriterBMP : public ImageWriter
 {
@@ -31,6 +32,6 @@ public:
 
 	ImageWriterBMP();
 
-	virtual void writeImage(const Image& image, const std::string& path) const override;
+	virtual void writeImage(const Image& image, const std::wstring& path) const override;
 };
 

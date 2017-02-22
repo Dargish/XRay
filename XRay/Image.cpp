@@ -27,6 +27,13 @@ size_t Image::height() const
 	return m_height;
 }
 
+void Image::resize(size_t width, size_t height)
+{
+	m_width = width;
+	m_height = height;
+	m_pixels.resize(m_width * m_height);
+}
+
 float Image::aspectRatio() const
 {
 	return float(m_width) / float(m_height);

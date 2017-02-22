@@ -32,7 +32,7 @@ ImageWriterTGA::ImageWriterTGA()
 
 }
 
-void ImageWriterTGA::writeImage(const Image& image, const std::string& path) const
+void ImageWriterTGA::writeImage(const Image& image, const std::wstring& path) const
 {
 	Header header;
 	header.imageWidth = (short)image.width();

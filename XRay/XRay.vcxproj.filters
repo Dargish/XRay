@@ -135,6 +135,9 @@
     <ClCompile Include="ImageWriterEXR.cpp">
       <Filter>Source Files\ImageIO</Filter>
     </ClCompile>
+    <ClCompile Include="ImageReaderEXR.cpp">
+      <Filter>Source Files\ImageIO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -222,6 +225,12 @@
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="ImageWriterEXR.h">
+      <Filter>Header Files\ImageIO</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageReader.h">
+      <Filter>Header Files\ImageIO</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageReaderEXR.h">
       <Filter>Header Files\ImageIO</Filter>
     </ClInclude>
   </ItemGroup>

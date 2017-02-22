@@ -120,6 +120,8 @@ copy $(SolutionDir)external\ilmbase-2.2\bin\IlmThread-2_2.dll $(SolutionDir)$(Pl
 copy $(SolutionDir)external\ilmbase-2.2\bin\Iex-2_2.dll $(SolutionDir)$(Platform)\$(Configuration)\
 copy $(SolutionDir)external\ilmbase-2.2\bin\Imath-2_2.dll $(SolutionDir)$(Platform)\$(Configuration)\
 copy $(SolutionDir)external\zlib-1.2.11\bin\zlib.dll $(SolutionDir)$(Platform)\$(Configuration)\
+mkdir $(SolutionDir)$(Platform)\$(Configuration)\images\
+copy $(SolutionDir)images $(SolutionDir)$(Platform)\$(Configuration)\images\
 
 </Command>
     </PostBuildEvent>
@@ -174,6 +176,8 @@ copy $(SolutionDir)external\ilmbase-2.2\bin\IlmThread-2_2.dll $(SolutionDir)$(Pl
 copy $(SolutionDir)external\ilmbase-2.2\bin\Iex-2_2.dll $(SolutionDir)$(Platform)\$(Configuration)\
 copy $(SolutionDir)external\ilmbase-2.2\bin\Imath-2_2.dll $(SolutionDir)$(Platform)\$(Configuration)\
 copy $(SolutionDir)external\zlib-1.2.11\bin\zlib.dll $(SolutionDir)$(Platform)\$(Configuration)\
+mkdir $(SolutionDir)$(Platform)\$(Configuration)\images\
+copy $(SolutionDir)images $(SolutionDir)$(Platform)\$(Configuration)\images\
 
 </Command>
     </PostBuildEvent>
@@ -188,6 +192,7 @@ copy $(SolutionDir)external\zlib-1.2.11\bin\zlib.dll $(SolutionDir)$(Platform)\$
     <ClCompile Include="DistributionGGX.cpp" />
     <ClCompile Include="FresnelSchlick.cpp" />
     <ClCompile Include="GeometricNeumann.cpp" />
+    <ClCompile Include="ImageReaderEXR.cpp" />
     <ClCompile Include="ImageWriterEXR.cpp" />
     <ClCompile Include="IntersectablePlane.cpp" />
     <ClCompile Include="LightDirectional.cpp" />
@@ -216,6 +221,8 @@ copy $(SolutionDir)external\zlib-1.2.11\bin\zlib.dll $(SolutionDir)$(Platform)\$
     <ClInclude Include="FresnelSchlick.h" />
     <ClInclude Include="fwd.h" />
     <ClInclude Include="GeometricNeumann.h" />
+    <ClInclude Include="ImageReader.h" />
+    <ClInclude Include="ImageReaderEXR.h" />
     <ClInclude Include="ImageWriterEXR.h" />
     <ClInclude Include="IntersectablePlane.h" />
     <ClInclude Include="Light.h" />

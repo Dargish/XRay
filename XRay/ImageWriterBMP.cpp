@@ -44,7 +44,7 @@ ImageWriterBMP::ImageWriterBMP()
 
 }
 
-void ImageWriterBMP::writeImage(const Image& image, const std::string& path) const
+void ImageWriterBMP::writeImage(const Image& image, const std::wstring& path) const
 {
 	BMPFileHeader fileHeader;
 	BMPCoreHeader v5Header;

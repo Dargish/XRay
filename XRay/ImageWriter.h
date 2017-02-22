@@ -5,8 +5,6 @@
 #include <string>
 
 
-typedef unsigned char ubyte;
-
 class ImageWriter
 {
 public:
@@ -14,6 +12,6 @@ public:
 
 	virtual ~ImageWriter() { };
 
-	virtual void writeImage(const Image& image, const std::string& path) const = 0;
+	virtual void writeImage(const Image& image, const std::wstring& path) const = 0;
 };
 

@@ -2,6 +2,9 @@
 #include "Image.h"
 #include "Math.h"
 
+#include <locale>
+#include <codecvt>
+
 #pragma warning( disable : 4996 4251 ) 
 
 #define OPENEXR_DLL
@@ -15,9 +18,11 @@ ImageWriterEXR::ImageWriterEXR()
 
 }
 
-void ImageWriterEXR::writeImage(const Image& image, const std::string& path) const
+void ImageWriterEXR::writeImage(const Image& image, const std::wstring& pathUtf16) const
 {
-	RgbaOutputFile fileOut(path.c_str(), (int)image.width(), (int)image.height());
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> convert;
+	std::string pathUtf8 = convert.to_bytes(pathUtf16);
+	RgbaOutputFile fileOut(pathUtf8.c_str(), (int)image.width(), (int)image.height());
 
 	std::vector<Rgba> frameBuffer(image.width() * image.height());
 
@@ -36,5 +41,5 @@ void ImageWriterEXR::writeImage(const Image& image, const std::string& path) con
 
 	fileOut.setFrameBuffer(&frameBuffer.front(), 1, image.width());
 
-	fileOut.writePixels(image.height());
+	fileOut.writePixels((int)image.height());
 }
