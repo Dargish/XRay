@@ -6,9 +6,10 @@
 #undef max
 #undef min
 
-#define PI_F 3.141592653589f
-#define PI_2F 6.283185307178f
-#define EPS_F 0.000001f
+#define HALF_PI_F 1.570796326795f
+#define PI_F      3.141592653589f
+#define PI_2F     6.283185307178f
+#define EPS_F     0.000001f
 
 inline bool fequals(float l, float r)
 {

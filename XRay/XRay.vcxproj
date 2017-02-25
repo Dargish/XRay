@@ -190,6 +190,8 @@ copy $(SolutionDir)images $(SolutionDir)$(Platform)\$(Configuration)\images\
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DiffuseOrenNayer.cpp" />
     <ClCompile Include="DistributionGGX.cpp" />
+    <ClCompile Include="EnvironmentMap.cpp" />
+    <ClCompile Include="EnvironmentMapLatLong.cpp" />
     <ClCompile Include="FresnelSchlick.cpp" />
     <ClCompile Include="GeometricNeumann.cpp" />
     <ClCompile Include="ImageReaderEXR.cpp" />
@@ -218,6 +220,8 @@ copy $(SolutionDir)images $(SolutionDir)$(Platform)\$(Configuration)\images\
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DiffuseOrenNayer.h" />
     <ClInclude Include="DistributionGGX.h" />
+    <ClInclude Include="EnvironmentMap.h" />
+    <ClInclude Include="EnvironmentMapLatLong.h" />
     <ClInclude Include="FresnelSchlick.h" />
     <ClInclude Include="fwd.h" />
     <ClInclude Include="GeometricNeumann.h" />

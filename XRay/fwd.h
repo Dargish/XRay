@@ -5,6 +5,7 @@
 
 
 class Camera;
+class EnvironmentMap;
 class Image;
 class ImageWriter;
 class ImageWriterBMP;
@@ -26,6 +27,7 @@ class IntersectableSphere;
 class Vector3;
 
 typedef std::shared_ptr<Camera> CameraPtr;
+typedef std::shared_ptr<EnvironmentMap> EnvironmentMapPtr;
 typedef std::shared_ptr<Intersectable> IntersectablePtr;
 typedef std::shared_ptr<Light> LightPtr;
 typedef std::shared_ptr<PostProcess> PostProcessPtr;

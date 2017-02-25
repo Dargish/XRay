@@ -18,6 +18,16 @@ const LightPtrs& Scene::lights() const
 	return m_lights;
 }
 
+EnvironmentMapPtr& Scene::environmentMap()
+{
+	return m_environmentMap;
+}
+
+const EnvironmentMapPtr& Scene::environmentMap() const
+{
+	return m_environmentMap;
+}
+
 bool Scene::shootRay(Ray& ray, RayIntersectionResult* result /*= NULL*/) const
 {
 	bool hit = false;

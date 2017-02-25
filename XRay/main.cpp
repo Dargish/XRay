@@ -16,6 +16,7 @@
 #include "ImageWriterBMP.h"
 #include "ImageWriterTGA.h"
 #include "ImageWriterEXR.h"
+#include "EnvironmentMapLatLong.h"
 #include "PostProcessGammaCorrect.h"
 
 #include "DiffuseOrenNayer.h"
@@ -45,7 +46,8 @@ int main()
 		directory = directory.substr(0, lastSlash + 1);
 	}
 
-	std::wstring renderDirectory = directory + L"renders";
+	std::wstring renderDirectory = directory + L"renders\\";
+	std::wstring imageDirectory = directory + L"images\\";
 
 	if (!CreateDirectory(renderDirectory.c_str(), NULL) && ERROR_ALREADY_EXISTS != GetLastError())
 	{
@@ -74,6 +76,8 @@ int main()
 	ShaderPtr goldShader(new ShaderBRDF(brdfSet, RGB(0.0f, 0.0f, 0.0f), 0.01f, RGB(1.0f, 0.71f, 0.29f)));
 
 	ScenePtr scene(new Scene);
+
+	scene->environmentMap().reset(new EnvironmentMapLatLong(imageDirectory + L"StageEnvLatLong.exr"));
 
 	scene->addLight<LightDirectional>(Vector3(-0.5f, -0.5f, 1.0f), RGBA(1.0f, 1.0f, 1.0f, 2.0f), 0.5f, 0.05f);
 

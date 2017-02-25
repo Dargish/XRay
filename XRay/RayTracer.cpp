@@ -6,6 +6,7 @@
 #include "Light.h"
 #include "Shader.h"
 #include "Intersectable.h"
+#include "EnvironmentMap.h"
 
 #include <tbb/task_group.h>
 #include <tbb/parallel_for.h>
@@ -119,6 +120,10 @@ RGBA RayTracer::traceRays(Ray& ray, float coneRadAngle, const Vector3& planeNorm
 				combined.a += 1.0;
 			}
 		}
+		else if (m_scene->environmentMap())
+		{
+			combined += m_scene->environmentMap()->sample(thisRay.direction);
+		}
 	});
 	combined /= (float)rayCount;
 	return combined;
@@ -138,6 +143,10 @@ RGBA RayTracer::traceRay(Ray& ray) const
 		{
 			result.a = 1.0;
 		}
+	}
+	else if (m_scene->environmentMap())
+	{
+		result = m_scene->environmentMap()->sample(ray.direction);
 	}
 	return result;
 }

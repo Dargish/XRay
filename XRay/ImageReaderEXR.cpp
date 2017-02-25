@@ -33,4 +33,5 @@ void ImageReaderEXR::readImage(Image& image, const std::wstring& pathUtf16) cons
 
 	std::vector<Rgba> frameBuffer(width * height);
 	fileIn.setFrameBuffer(&frameBuffer.front(), 1, width);
-	fileIn.readPixels(dw.min.y, dw.max.y);}
+	fileIn.readPixels(dw.min.y, dw.max.y);
+}

@@ -20,6 +20,9 @@ public:
 	const IntersectablePtrs& intersectables() const;
 	const LightPtrs& lights() const;
 
+	EnvironmentMapPtr& environmentMap();
+	const EnvironmentMapPtr& environmentMap() const;
+
 	template <typename INTERSECTABLE_TYPE, typename ...Args>
 	std::shared_ptr<INTERSECTABLE_TYPE> addIntersectable(Args... args);
 
@@ -31,6 +34,7 @@ public:
 private:
 	IntersectablePtrs m_intersectables;
 	LightPtrs m_lights;
+	EnvironmentMapPtr m_environmentMap;
 };
 
 template <typename INTERSECTABLE_TYPE, typename ...Args>

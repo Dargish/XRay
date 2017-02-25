@@ -17,6 +17,27 @@ const RGBA& Image::pixel(size_t w, size_t h) const
 	return m_pixels[h * m_width + w];
 }
 
+RGBA Image::sample(float x, float y) const
+{
+	float sx = x * m_width;
+	float sy = y * m_height;
+	size_t x0 = (size_t)std::floorf(sx);
+	size_t y0 = (size_t)std::floorf(sy);
+	size_t x1 = (x0 + 1) % m_width;
+	size_t y1 = (y0 + 1) % m_height;
+	float lx = sx - x0;
+	float nlx = 1.0f - lx;
+	float ly = sy - y0;
+	float nly = 1.0f - ly;
+	const RGBA& s00 = pixel(x0, y0);
+	const RGBA& s01 = pixel(x0, y1);
+	const RGBA& s10 = pixel(x1, y0);
+	const RGBA& s11 = pixel(x1, y1);
+	RGBA s0 = s00 * nlx + s10 * lx;
+	RGBA s1 = s01 * nlx + s11 * lx;
+	return s0 * nly + s1 * ly;
+}
+
 size_t Image::width() const
 {
 	return m_width;

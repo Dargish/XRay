@@ -17,6 +17,9 @@ public:
 	RGBA& pixel(size_t w, size_t h);
 	const RGBA& pixel(size_t w, size_t h) const;
 
+	// Standard box sample
+	RGBA sample(float x, float y) const;
+
 	size_t width() const;
 	size_t height() const;
 
